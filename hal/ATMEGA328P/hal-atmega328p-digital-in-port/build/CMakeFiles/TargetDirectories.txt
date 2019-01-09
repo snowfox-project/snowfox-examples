@@ -1,0 +1,3 @@
+/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-in-port/build/CMakeFiles/edit_cache.dir
+/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-in-port/build/CMakeFiles/rebuild_cache.dir
+/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-in-port/build/CMakeFiles/hal-atmega328p-digital-in-port.dir

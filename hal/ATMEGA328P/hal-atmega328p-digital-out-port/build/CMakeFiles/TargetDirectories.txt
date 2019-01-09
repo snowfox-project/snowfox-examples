@@ -1,0 +1,3 @@
+/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-out-port/build/CMakeFiles/edit_cache.dir
+/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-out-port/build/CMakeFiles/rebuild_cache.dir
+/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-out-port/build/CMakeFiles/hal-atmega328p-digital-out-port.dir

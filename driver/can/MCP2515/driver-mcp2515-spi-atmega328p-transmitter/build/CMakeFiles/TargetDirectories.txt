@@ -1,0 +1,3 @@
+/home/alex/tmp/spectre/examples/driver/can/MCP2515/driver-mcp2515-spi-atmega328p-transmitter/build/CMakeFiles/rebuild_cache.dir
+/home/alex/tmp/spectre/examples/driver/can/MCP2515/driver-mcp2515-spi-atmega328p-transmitter/build/CMakeFiles/edit_cache.dir
+/home/alex/tmp/spectre/examples/driver/can/MCP2515/driver-mcp2515-spi-atmega328p-transmitter/build/CMakeFiles/driver-mcp2515-spi-atmega328p-transmitter.dir

@@ -1,0 +1,3 @@
+/home/alex/tmp/spectre/examples/driver/sensor/LIS2DSH/driver-lis2dsh-i2c-atmega328p-debug/build/CMakeFiles/edit_cache.dir
+/home/alex/tmp/spectre/examples/driver/sensor/LIS2DSH/driver-lis2dsh-i2c-atmega328p-debug/build/CMakeFiles/rebuild_cache.dir
+/home/alex/tmp/spectre/examples/driver/sensor/LIS2DSH/driver-lis2dsh-i2c-atmega328p-debug/build/CMakeFiles/driver-lis2dsh-i2c-atmega328p-debug.dir

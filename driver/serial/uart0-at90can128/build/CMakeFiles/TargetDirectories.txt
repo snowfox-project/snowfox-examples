@@ -1,0 +1,3 @@
+/home/alex/tmp/spectre/examples/driver/serial/uart0-at90can128/build/CMakeFiles/edit_cache.dir
+/home/alex/tmp/spectre/examples/driver/serial/uart0-at90can128/build/CMakeFiles/rebuild_cache.dir
+/home/alex/tmp/spectre/examples/driver/serial/uart0-at90can128/build/CMakeFiles/driver-serial-uart0-at90can128.dir

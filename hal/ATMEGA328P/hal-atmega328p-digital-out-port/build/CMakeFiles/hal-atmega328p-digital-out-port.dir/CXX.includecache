@@ -1,0 +1,44 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-out-port/hal-atmega328p-digital-out-port.cpp
+avr/io.h
+-
+spectre/hal/avr/ATMEGA328P/Delay.h
+-
+spectre/hal/avr/ATMEGA328P/DigitalOutPort.h
+-
+
+/usr/local/include/spectre/hal/avr/ATMEGA328P/Delay.h
+spectre/hal/avr/common/ATxxxx/Delay.h
+-
+
+/usr/local/include/spectre/hal/avr/ATMEGA328P/DigitalOutPort.h
+spectre/hal/avr/common/ATxxxx/DigitalOutPort.h
+-
+
+/usr/local/include/spectre/hal/avr/common/ATxxxx/Delay.h
+spectre/hal/interface/delay/Delay.h
+-
+
+/usr/local/include/spectre/hal/avr/common/ATxxxx/DigitalOutPort.h
+stdint.h
+-
+spectre/hal/interface/gpio/DigitalOutPort.h
+-
+
+/usr/local/include/spectre/hal/interface/delay/Delay.h
+stdint.h
+-
+
+/usr/local/include/spectre/hal/interface/gpio/DigitalOutPort.h
+spectre/hal/interface/gpio/control/DigitalOutPortControl.h
+-
+
+/usr/local/include/spectre/hal/interface/gpio/control/DigitalOutPortControl.h
+

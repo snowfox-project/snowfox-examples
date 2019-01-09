@@ -1,0 +1,3 @@
+/home/alex/tmp/spectre/examples/driver/ioexpander/MCP23017/driver-mcp23017-i2c-atmega328p-debug/build/CMakeFiles/edit_cache.dir
+/home/alex/tmp/spectre/examples/driver/ioexpander/MCP23017/driver-mcp23017-i2c-atmega328p-debug/build/CMakeFiles/rebuild_cache.dir
+/home/alex/tmp/spectre/examples/driver/ioexpander/MCP23017/driver-mcp23017-i2c-atmega328p-debug/build/CMakeFiles/driver-mcp23017-i2c-atmega328p-debug.dir
