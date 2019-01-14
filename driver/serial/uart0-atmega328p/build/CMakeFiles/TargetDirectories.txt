@@ -1,3 +1,0 @@
-/home/alex/tmp/spectre/examples/driver/serial/uart0-atmega328p/build/CMakeFiles/edit_cache.dir
-/home/alex/tmp/spectre/examples/driver/serial/uart0-atmega328p/build/CMakeFiles/rebuild_cache.dir
-/home/alex/tmp/spectre/examples/driver/serial/uart0-atmega328p/build/CMakeFiles/driver-serial-uart0-atmega328p-blox.dir

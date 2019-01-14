@@ -1,3 +1,0 @@
-/home/alex/tmp/spectre/examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega328p-receiver-dragino-lora-shield-v1.4/build/CMakeFiles/edit_cache.dir
-/home/alex/tmp/spectre/examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega328p-receiver-dragino-lora-shield-v1.4/build/CMakeFiles/rebuild_cache.dir
-/home/alex/tmp/spectre/examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega328p-receiver-dragino-lora-shield-v1.4/build/CMakeFiles/driver-rfm9x-spi-atmega328p-receiver-dragino-lora-shield-v1.4.dir

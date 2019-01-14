@@ -1,3 +1,0 @@
-/home/alex/tmp/spectre/examples/driver/sensor/AD7151/driver-ad7151-i2c-atmega328p/build/CMakeFiles/edit_cache.dir
-/home/alex/tmp/spectre/examples/driver/sensor/AD7151/driver-ad7151-i2c-atmega328p/build/CMakeFiles/rebuild_cache.dir
-/home/alex/tmp/spectre/examples/driver/sensor/AD7151/driver-ad7151-i2c-atmega328p/build/CMakeFiles/driver-ad7151-i2c-atmega328p.dir

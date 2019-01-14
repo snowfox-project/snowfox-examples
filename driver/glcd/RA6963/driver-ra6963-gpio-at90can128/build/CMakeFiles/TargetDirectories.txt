@@ -1,3 +1,0 @@
-/home/alex/tmp/spectre/examples/driver/glcd/RA6963/driver-ra6963-gpio-at90can128/build/CMakeFiles/rebuild_cache.dir
-/home/alex/tmp/spectre/examples/driver/glcd/RA6963/driver-ra6963-gpio-at90can128/build/CMakeFiles/edit_cache.dir
-/home/alex/tmp/spectre/examples/driver/glcd/RA6963/driver-ra6963-gpio-at90can128/build/CMakeFiles/driver-ra6963-gpio-at90can128.dir

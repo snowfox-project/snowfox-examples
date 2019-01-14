@@ -1,3 +1,0 @@
-/home/alex/tmp/spectre/examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega1284p-debug-moteino-mega-usb/build/CMakeFiles/edit_cache.dir
-/home/alex/tmp/spectre/examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega1284p-debug-moteino-mega-usb/build/CMakeFiles/rebuild_cache.dir
-/home/alex/tmp/spectre/examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega1284p-debug-moteino-mega-usb/build/CMakeFiles/driver-rfm9x-spi-atmega1284p-debug-moteino-mega-usb.dir
