@@ -1,3 +1,0 @@
-/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-out-pin/build/CMakeFiles/edit_cache.dir
-/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-out-pin/build/CMakeFiles/rebuild_cache.dir
-/home/alex/tmp/spectre/examples/hal/ATMEGA328P/hal-atmega328p-digital-out-pin/build/CMakeFiles/hal-atmega328p-digital-out-pin.dir
