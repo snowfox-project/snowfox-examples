@@ -83,7 +83,7 @@ int main()
 
   ATMEGA2560::Flash               flash;
 
-  ATMEGA2560::InterruptController int_ctrl     (&EIMSK, &PCICR, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &TIMSK3, &TIMSK4, &TIMSK5, &UCSR0B, &UCSR1B, &UCSR2B, &UCSR3B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
+  ATMEGA2560::InterruptController int_ctrl     (&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &TIMSK3, &TIMSK4, &TIMSK5, &UCSR0B, &UCSR1B, &UCSR2B, &UCSR3B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
   ATMEGA2560::CriticalSection     crit_sec     (&SREG);
 
   ATMEGA2560::DigitalOutPin       rfm9x_cs     (&DDRB, &PORTB,        4);     /* CS   = D10          = PB4 */

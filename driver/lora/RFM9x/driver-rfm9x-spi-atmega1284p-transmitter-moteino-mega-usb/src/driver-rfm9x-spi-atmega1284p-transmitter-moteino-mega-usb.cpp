@@ -49,10 +49,10 @@
 #include <spectre/hal/avr/ATMEGA1284P/CriticalSection.h>
 #include <spectre/hal/avr/ATMEGA1284P/InterruptController.h>
 #include <spectre/hal/avr/ATMEGA1284P/ExternalInterruptController.h>
+#include <spectre/hal/avr/ATMEGA1284P/ExternalInterruptController.h>
 
 #include <spectre/blox/hal/avr/ATMEGA1284P/UART0.h>
 #include <spectre/blox/hal/avr/ATMEGA1284P/SpiMaster.h>
-#include <spectre/blox/hal/avr/ATMEGA1284P/ExternalInterruptController.h>
 
 #include <spectre/blox/driver/serial/SerialUart.h>
 
@@ -111,15 +111,17 @@ int main()
    * HAL
    ************************************************************************************/
 
-  ATMEGA1284P::Delay               delay;
+  ATMEGA1284P::Delay                       delay;
 
-  ATMEGA1284P::InterruptController int_ctrl  (&EIMSK, &PCICR, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &UCSR1B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
-  ATMEGA1284P::CriticalSection     crit_sec  (&SREG);
+  ATMEGA1284P::InterruptController         int_ctrl    (&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &PCMSK3, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &UCSR1B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
+  ATMEGA1284P::CriticalSection             crit_sec    (&SREG);
+  ATMEGA1284P::ExternalInterruptController ext_int_ctrl(&EICRA,
+                                                        int_ctrl);
 
-  ATMEGA1284P::DigitalOutPin       rfm9x_cs  (&DDRB, &PORTB,        4); /* CS   = D4 = PB4 */
-  ATMEGA1284P::DigitalOutPin       rfm9x_sck (&DDRB, &PORTB,        7); /* SCK  = D7 = PB7 */
-  ATMEGA1284P::DigitalInPin        rfm9x_miso(&DDRB, &PORTB, &PINB, 6); /* MISO = D6 = PB6 */
-  ATMEGA1284P::DigitalOutPin       rfm9x_mosi(&DDRB, &PORTB,        5); /* MOSI = D5 = PB5 */
+  ATMEGA1284P::DigitalOutPin               rfm9x_cs    (&DDRB, &PORTB,        4); /* CS   = D4 = PB4 */
+  ATMEGA1284P::DigitalOutPin               rfm9x_sck   (&DDRB, &PORTB,        7); /* SCK  = D7 = PB7 */
+  ATMEGA1284P::DigitalInPin                rfm9x_miso  (&DDRB, &PORTB, &PINB, 6); /* MISO = D6 = PB6 */
+  ATMEGA1284P::DigitalOutPin               rfm9x_mosi  (&DDRB, &PORTB,        5); /* MOSI = D5 = PB5 */
 
   rfm9x_cs.set();
   rfm9x_miso.setPullUpMode(hal::interface::PullUpMode::PULL_UP);
@@ -141,26 +143,19 @@ int main()
                                                               RFM9x_SPI_BIT_ORDER,
                                                               RFM9x_SPI_PRESCALER);
 
-  blox::ATMEGA1284P::ExternalInterruptController ext_int_ctrl(&EICRA,
-                                                              &PCMSK0,
-                                                              &PCMSK1,
-                                                              &PCMSK2,
-                                                              &PCMSK3,
-                                                              int_ctrl);
-
 
   /* EXT INT #2 for DIO0 notifications by RFM9x ***************************************/
   ATMEGA1284P::DigitalInPin rfm9x_dio0_int_pin              (&DDRB, &PORTB, &PINB, 2); /* D2 = PB2 = INT2 */
                             rfm9x_dio0_int_pin.setPullUpMode(hal::interface::PullUpMode::PULL_UP);
 
-  ext_int_ctrl().setTriggerMode(ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::EXTERNAL_INT2), RFM9x_DIO0_INT_TRIGGER_MODE);
-  ext_int_ctrl().enable        (ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::EXTERNAL_INT2)                             );
+  ext_int_ctrl.setTriggerMode(ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::EXTERNAL_INT2), RFM9x_DIO0_INT_TRIGGER_MODE);
+  ext_int_ctrl.enable        (ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::EXTERNAL_INT2)                             );
 
   /* EXT INT #2 for DIO1 notifications by RFM9x ***************************************/
   ATMEGA1284P::DigitalInPin rfm9x_dio1_int_pin              (&DDRC, &PORTC, &PINC, 6); /* D22 = PC6 = PCINT22 */
                             rfm9x_dio1_int_pin.setPullUpMode(hal::interface::PullUpMode::PULL_UP);
 
-  ext_int_ctrl().enable        (ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::PIN_CHANGE_INT22));
+  ext_int_ctrl.enable        (ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::PIN_CHANGE_INT22));
 
   /* GLOBAL INTERRUPT *****************************************************************/
   int_ctrl.enableInterrupt(ATMEGA164P_324P_644P_1284P::toIntNum(ATMEGA1284P::Interrupt::GLOBAL));
@@ -205,8 +200,8 @@ int main()
 
   lora::RFM9x::RFM9x                              rfm9x                                 (rfm9x_config, rfm9x_control, rfm9x_status, rfm9x_rx_done_event, rfm9x_rx_timeout_event, rfm9x_tx_done_event);
 
-  ext_int_ctrl().registerExternalInterruptCallback(ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::EXTERNAL_INT2   ), &rfm9x_dio0_event_callback        );
-  ext_int_ctrl().registerExternalInterruptCallback(ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::PIN_CHANGE_INT22), &rfm9x_dio1_event_callback_adapter);
+  ext_int_ctrl.registerInterruptCallback(ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::EXTERNAL_INT2   ), &rfm9x_dio0_event_callback        );
+  ext_int_ctrl.registerInterruptCallback(ATMEGA164P_324P_644P_1284P::toExtIntNum(ATMEGA1284P::ExternalInterrupt::PIN_CHANGE_INT22), &rfm9x_dio1_event_callback_adapter);
 
 
   uint32_t frequenzy_Hz     = 433775000; /* 433.775 Mhz - Dedicated for digital communication channels in the 70 cm band */

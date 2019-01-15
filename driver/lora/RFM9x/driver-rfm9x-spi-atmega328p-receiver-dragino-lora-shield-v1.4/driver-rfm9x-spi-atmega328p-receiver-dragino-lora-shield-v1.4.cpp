@@ -46,10 +46,10 @@
 #include <spectre/hal/avr/ATMEGA328P/DigitalOutPin.h>
 #include <spectre/hal/avr/ATMEGA328P/CriticalSection.h>
 #include <spectre/hal/avr/ATMEGA328P/InterruptController.h>
+#include <spectre/hal/avr/ATMEGA328P/ExternalInterruptController.h>
 
 #include <spectre/blox/hal/avr/ATMEGA328P/UART0.h>
 #include <spectre/blox/hal/avr/ATMEGA328P/SpiMaster.h>
-#include <spectre/blox/hal/avr/ATMEGA328P/ExternalInterruptController.h>
 
 #include <spectre/blox/driver/serial/SerialUart.h>
 
@@ -108,60 +108,57 @@ int main()
    * HAL
    ************************************************************************************/
 
-  ATMEGA328P::Delay               delay;
+  ATMEGA328P::Delay                       delay;
 
-  ATMEGA328P::InterruptController int_ctrl  (&EIMSK, &PCICR, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
-  ATMEGA328P::CriticalSection     crit_sec  (&SREG);
+  ATMEGA328P::InterruptController         int_ctrl    (&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
+  ATMEGA328P::CriticalSection             crit_sec    (&SREG);
+  ATMEGA328P::ExternalInterruptController ext_int_ctrl(&EICRA,
+                                                       int_ctrl);
 
   /* As the datasheet state: 'If SS is configured as an input and is driven low
    * while MSTR is set, MSTR will be cleared.'. This means that in this special
    * case where the CS pin is equal with SS pin we need to set it before configuring
    * the SPI interface.
    */
-  ATMEGA328P::DigitalOutPin       rfm9x_cs  (&DDRB, &PORTB,        2); /* CS   = D10 = PB2 */
-  ATMEGA328P::DigitalOutPin       rfm9x_sck (&DDRB, &PORTB,        5); /* SCK  = D13 = PB5 */
-  ATMEGA328P::DigitalInPin        rfm9x_miso(&DDRB, &PORTB, &PINB, 4); /* MISO = D12 = PB4 */
-  ATMEGA328P::DigitalOutPin       rfm9x_mosi(&DDRB, &PORTB,        3); /* MOSI = D11 = PB3 */
+  ATMEGA328P::DigitalOutPin               rfm9x_cs    (&DDRB, &PORTB,        2); /* CS   = D10 = PB2 */
+  ATMEGA328P::DigitalOutPin               rfm9x_sck   (&DDRB, &PORTB,        5); /* SCK  = D13 = PB5 */
+  ATMEGA328P::DigitalInPin                rfm9x_miso  (&DDRB, &PORTB, &PINB, 4); /* MISO = D12 = PB4 */
+  ATMEGA328P::DigitalOutPin               rfm9x_mosi  (&DDRB, &PORTB,        3); /* MOSI = D11 = PB3 */
 
   rfm9x_cs.set();
   rfm9x_miso.setPullUpMode(hal::interface::PullUpMode::PULL_UP);
 
-  blox::ATMEGA328P::UART0                       uart0       (&UDR0,
-                                                             &UCSR0A,
-                                                             &UCSR0B,
-                                                             &UCSR0C,
-                                                             &UBRR0,
-                                                             int_ctrl,
-                                                             F_CPU);
+  blox::ATMEGA328P::UART0     uart0     (&UDR0,
+                                         &UCSR0A,
+                                         &UCSR0B,
+                                         &UCSR0C,
+                                         &UBRR0,
+                                         int_ctrl,
+                                         F_CPU);
 
-  blox::ATMEGA328P::SpiMaster                   spi_master  (&SPCR,
-                                                             &SPSR,
-                                                             &SPDR,
-                                                             crit_sec,
-                                                             int_ctrl,
-                                                             RFM9x_SPI_MODE,
-                                                             RFM9x_SPI_BIT_ORDER,
-                                                             RFM9x_SPI_PRESCALER);
+  blox::ATMEGA328P::SpiMaster spi_master(&SPCR,
+                                         &SPSR,
+                                         &SPDR,
+                                         crit_sec,
+                                         int_ctrl,
+                                         RFM9x_SPI_MODE,
+                                         RFM9x_SPI_BIT_ORDER,
+                                         RFM9x_SPI_PRESCALER);
 
-  blox::ATMEGA328P::ExternalInterruptController ext_int_ctrl(&EICRA,
-                                                             &PCMSK0,
-                                                             &PCMSK1,
-                                                             &PCMSK2,
-                                                             int_ctrl);
 
   /* EXT INT #0 for DIO0 notifications by RFM9x ***************************************/
   ATMEGA328P::DigitalInPin rfm9x_dio0_int_pin              (&DDRD, &PORTD, &PIND, 2); /* D2 = PD2 = INT0 */
                            rfm9x_dio0_int_pin.setPullUpMode(hal::interface::PullUpMode::PULL_UP);
 
-  ext_int_ctrl().setTriggerMode(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT0), RFM9x_DIO0_INT_TRIGGER_MODE);
-  ext_int_ctrl().enable        (ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT0)                             );
+  ext_int_ctrl.setTriggerMode(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT0), RFM9x_DIO0_INT_TRIGGER_MODE);
+  ext_int_ctrl.enable        (ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT0)                             );
 
   /* EXT INT #1 for DIO1 notifications by RFM9x ***************************************/
   ATMEGA328P::DigitalInPin rfm9x_dio1_int_pin              (&DDRD, &PORTD, &PIND, 3); /* D3 = PD3 = INT1 */
                            rfm9x_dio1_int_pin.setPullUpMode(hal::interface::PullUpMode::PULL_UP);
 
-  ext_int_ctrl().setTriggerMode(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT1), RFM9x_DIO1_INT_TRIGGER_MODE);
-  ext_int_ctrl().enable        (ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT1)                             );
+  ext_int_ctrl.setTriggerMode(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT1), RFM9x_DIO1_INT_TRIGGER_MODE);
+  ext_int_ctrl.enable        (ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT1)                             );
 
   /* GLOBAL INTERRUPT *****************************************************************/
   int_ctrl.enableInterrupt(ATMEGA328P::toIntNum(ATMEGA328P::Interrupt::GLOBAL));
@@ -205,8 +202,8 @@ int main()
 
   lora::RFM9x::RFM9x                              rfm9x                                 (rfm9x_config, rfm9x_control, rfm9x_status, rfm9x_rx_done_event, rfm9x_rx_timeout_event, rfm9x_tx_done_event);
 
-  ext_int_ctrl().registerExternalInterruptCallback(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT0), &rfm9x_dio0_event_callback);
-  ext_int_ctrl().registerExternalInterruptCallback(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT1), &rfm9x_dio1_event_callback);
+  ext_int_ctrl.registerInterruptCallback(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT0), &rfm9x_dio0_event_callback);
+  ext_int_ctrl.registerInterruptCallback(ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT1), &rfm9x_dio1_event_callback);
 
 
   uint32_t frequenzy_Hz      = 433775000; /* 433.775 Mhz - Dedicated for digital communication channels in the 70 cm band */
