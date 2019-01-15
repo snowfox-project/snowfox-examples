@@ -59,14 +59,14 @@ RFM9x_Dio1EventCallbackAdapter::~RFM9x_Dio1EventCallbackAdapter()
  * PUBLIC MEMBER FUNCTIONS
  **************************************************************************************/
 
-void RFM9x_Dio1EventCallbackAdapter::onExternalEvent()
+void RFM9x_Dio1EventCallbackAdapter::onExternalInterrupt()
 {
   /* Trigger on rising edge only - if we had an event and the
    * input is high then we have had a rising edge event.
    */
   if(_rfm9x_dio1_int_pin.isSet())
   {
-    _rfm9x_dio1_event_callback.onExternalEvent();
+    _rfm9x_dio1_event_callback.onExternalInterrupt();
   }
 }
 
