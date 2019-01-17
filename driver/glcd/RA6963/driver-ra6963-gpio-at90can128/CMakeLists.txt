@@ -30,7 +30,7 @@ add_executable(
 
 target_link_libraries(
   ${TARGET}
-  spectre-at90can128
+  snowfox-at90can128
 )
 
 set_target_properties(

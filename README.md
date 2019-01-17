@@ -1,2 +1,2 @@
 # spectre-examples
-Examples for the Spectre embedded framework.
+Examples for the Snowfox embedded framework.

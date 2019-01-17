@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,21 +22,21 @@
 
 #include <avr/io.h>
 
-#include <spectre/hal/avr/ATMEGA328P/Delay.h>
-#include <spectre/hal/avr/ATMEGA328P/DigitalOutPin.h>
-#include <spectre/hal/avr/ATMEGA328P/DigitalInOutPort.h>
+#include <snowfox/hal/avr/ATMEGA328P/Delay.h>
+#include <snowfox/hal/avr/ATMEGA328P/DigitalOutPin.h>
+#include <snowfox/hal/avr/ATMEGA328P/DigitalInOutPort.h>
 
-#include <spectre/driver/tlcd/HD44780/HD44780.h>
-#include <spectre/driver/tlcd/HD44780/HD44780_Control.h>
-#include <spectre/driver/tlcd/HD44780/HD44780_IoGpio8Bit.h>
+#include <snowfox/driver/tlcd/HD44780/HD44780.h>
+#include <snowfox/driver/tlcd/HD44780/HD44780_Control.h>
+#include <snowfox/driver/tlcd/HD44780/HD44780_IoGpio8Bit.h>
 
 /**************************************************************************************
  * NAMESPACES
  **************************************************************************************/
 
-using namespace spectre;
-using namespace spectre::hal;
-using namespace spectre::driver;
+using namespace snowfox;
+using namespace snowfox::hal;
+using namespace snowfox::driver;
 
 /**************************************************************************************
  * MAIN

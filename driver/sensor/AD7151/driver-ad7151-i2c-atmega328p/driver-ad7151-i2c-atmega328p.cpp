@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -24,23 +24,23 @@
 
 #include <avr/io.h>
 
-#include <spectre/hal/avr/ATMEGA328P/Delay.h>
-#include <spectre/hal/avr/ATMEGA328P/CriticalSection.h>
-#include <spectre/hal/avr/ATMEGA328P/InterruptController.h>
+#include <snowfox/hal/avr/ATMEGA328P/Delay.h>
+#include <snowfox/hal/avr/ATMEGA328P/CriticalSection.h>
+#include <snowfox/hal/avr/ATMEGA328P/InterruptController.h>
 
-#include <spectre/blox/hal/avr/ATMEGA328P/I2cMaster.h>
+#include <snowfox/blox/hal/avr/ATMEGA328P/I2cMaster.h>
 
-#include <spectre/driver/sensor/AD7151/AD7151.h>
-#include <spectre/driver/sensor/AD7151/AD7151_IoI2c.h>
-#include <spectre/driver/sensor/AD7151/AD7151_Control.h>
+#include <snowfox/driver/sensor/AD7151/AD7151.h>
+#include <snowfox/driver/sensor/AD7151/AD7151_IoI2c.h>
+#include <snowfox/driver/sensor/AD7151/AD7151_Control.h>
 
 /**************************************************************************************
  * NAMESPACES
  **************************************************************************************/
 
-using namespace spectre;
-using namespace spectre::hal;
-using namespace spectre::driver;
+using namespace snowfox;
+using namespace snowfox::hal;
+using namespace snowfox::driver;
 
 /**************************************************************************************
  * GLOBAL CONSTANTS

@@ -31,7 +31,7 @@ add_executable(
 
 target_link_libraries(
   ${TARGET}
-  spectre-atmega2560
+  snowfox-atmega2560
 )
 
 set_target_properties(

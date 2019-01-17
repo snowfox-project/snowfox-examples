@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -22,20 +22,20 @@
 
 #include <avr/io.h>
 
-#include <spectre/hal/avr/ATMEGA328P/CriticalSection.h>
-#include <spectre/hal/avr/ATMEGA328P/InterruptController.h>
+#include <snowfox/hal/avr/ATMEGA328P/CriticalSection.h>
+#include <snowfox/hal/avr/ATMEGA328P/InterruptController.h>
 
-#include <spectre/blox/hal/avr/ATMEGA328P/UART0.h>
+#include <snowfox/blox/hal/avr/ATMEGA328P/UART0.h>
 
-#include <spectre/blox/driver/serial/SerialUart.h>
+#include <snowfox/blox/driver/serial/SerialUart.h>
 
 /**************************************************************************************
  * NAMESPACES
  **************************************************************************************/
 
-using namespace spectre;
-using namespace spectre::hal;
-using namespace spectre::driver;
+using namespace snowfox;
+using namespace snowfox::hal;
+using namespace snowfox::driver;
 
 /**************************************************************************************
  * CONSTANTS

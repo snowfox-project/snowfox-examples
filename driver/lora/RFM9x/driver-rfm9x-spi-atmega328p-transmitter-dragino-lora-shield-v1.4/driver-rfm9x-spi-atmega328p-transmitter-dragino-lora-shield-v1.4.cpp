@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -41,31 +41,31 @@
 
 #include <avr/io.h>
 
-#include <spectre/hal/avr/ATMEGA328P/Delay.h>
-#include <spectre/hal/avr/ATMEGA328P/DigitalInPin.h>
-#include <spectre/hal/avr/ATMEGA328P/DigitalOutPin.h>
-#include <spectre/hal/avr/ATMEGA328P/CriticalSection.h>
-#include <spectre/hal/avr/ATMEGA328P/InterruptController.h>
-#include <spectre/hal/avr/ATMEGA328P/ExternalInterruptController.h>
+#include <snowfox/hal/avr/ATMEGA328P/Delay.h>
+#include <snowfox/hal/avr/ATMEGA328P/DigitalInPin.h>
+#include <snowfox/hal/avr/ATMEGA328P/DigitalOutPin.h>
+#include <snowfox/hal/avr/ATMEGA328P/CriticalSection.h>
+#include <snowfox/hal/avr/ATMEGA328P/InterruptController.h>
+#include <snowfox/hal/avr/ATMEGA328P/ExternalInterruptController.h>
 
-#include <spectre/blox/hal/avr/ATMEGA328P/UART0.h>
-#include <spectre/blox/hal/avr/ATMEGA328P/SpiMaster.h>
+#include <snowfox/blox/hal/avr/ATMEGA328P/UART0.h>
+#include <snowfox/blox/hal/avr/ATMEGA328P/SpiMaster.h>
 
-#include <spectre/blox/driver/lora/RFM9x.h>
-#include <spectre/blox/driver/serial/SerialUart.h>
+#include <snowfox/blox/driver/lora/RFM9x.h>
+#include <snowfox/blox/driver/serial/SerialUart.h>
 
-#include <spectre/driver/lora/RFM9x/RFM9x_IoSpi.h>
+#include <snowfox/driver/lora/RFM9x/RFM9x_IoSpi.h>
 
-#include <spectre/trace/Trace.h>
-#include <spectre/trace/SerialTraceOutput.h>
+#include <snowfox/trace/Trace.h>
+#include <snowfox/trace/SerialTraceOutput.h>
 
 /**************************************************************************************
  * NAMESPACES
  **************************************************************************************/
 
-using namespace spectre;
-using namespace spectre::hal;
-using namespace spectre::driver;
+using namespace snowfox;
+using namespace snowfox::hal;
+using namespace snowfox::driver;
 
 /**************************************************************************************
  * CONSTANTS
@@ -194,7 +194,7 @@ int main()
   {
     uint8_t msg[64] = {0};
 
-    uint16_t const msg_len = snprintf(reinterpret_cast<char *>(msg), 64, "[Spectre RTOS (c) LXRobotics] [lora::RFM9x] Message %d\r\n", msg_cnt);
+    uint16_t const msg_len = snprintf(reinterpret_cast<char *>(msg), 64, "[Snowfox RTOS (c) LXRobotics] [lora::RFM9x] Message %d\r\n", msg_cnt);
 
     ssize_t const ret_code = rfm9x().write(msg, msg_len);
 

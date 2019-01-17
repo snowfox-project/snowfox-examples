@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -23,16 +23,16 @@
  * INCLUDE
  **************************************************************************************/
 
-#include <spectre/hal/interface/extint/ExternalInterruptCallback.h>
+#include <snowfox/hal/interface/extint/ExternalInterruptCallback.h>
 
-#include <spectre/hal/interface/gpio/DigitalInPin.h>
-#include <spectre/driver/lora/RFM9x/events/DIO1/RFM9x_Dio1EventCallback.h>
+#include <snowfox/hal/interface/gpio/DigitalInPin.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO1/RFM9x_Dio1EventCallback.h>
 
 /**************************************************************************************
  * NAMESPACE
  **************************************************************************************/
 
-namespace spectre
+namespace snowfox
 {
 
 namespace driver
@@ -77,6 +77,6 @@ private:
 
 } /* driver */
 
-} /* spectre */
+} /* snowfox */
 
 #endif /* EXAMPLES_DRIVER_LORA_RFM9X_DRIVER_RFM9X_SPI_ATMEGA1284P_TRANSMITTER_MOTEINO_MEGA_USB_RFM9X_DIO1EVENTCALLBACKADAPTER_H_ */

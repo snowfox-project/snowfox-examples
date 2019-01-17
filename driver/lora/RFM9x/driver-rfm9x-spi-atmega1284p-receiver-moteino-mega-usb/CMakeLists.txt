@@ -32,7 +32,7 @@ add_executable(
 
 target_link_libraries(
   ${TARGET}
-  spectre-atmega1284p
+  snowfox-atmega1284p
 )
 
 set_target_properties(

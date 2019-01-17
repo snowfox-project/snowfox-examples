@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -28,14 +28,14 @@
 
 #include <avr/io.h>
 
-#include <spectre/hal/avr/AT90CAN128/Delay.h>
-#include <spectre/hal/avr/AT90CAN128/DigitalOutPin.h>
-#include <spectre/hal/avr/AT90CAN128/DigitalInOutPort.h>
+#include <snowfox/hal/avr/AT90CAN128/Delay.h>
+#include <snowfox/hal/avr/AT90CAN128/DigitalOutPin.h>
+#include <snowfox/hal/avr/AT90CAN128/DigitalInOutPort.h>
 
-#include <spectre/driver/glcd/RA6963/RA6963.h>
-#include <spectre/driver/glcd/RA6963/RA6963_Data.h>
-#include <spectre/driver/glcd/RA6963/RA6963_Control.h>
-#include <spectre/driver/glcd/RA6963/RA6963_IoGpio8Bit.h>
+#include <snowfox/driver/glcd/RA6963/RA6963.h>
+#include <snowfox/driver/glcd/RA6963/RA6963_Data.h>
+#include <snowfox/driver/glcd/RA6963/RA6963_Control.h>
+#include <snowfox/driver/glcd/RA6963/RA6963_IoGpio8Bit.h>
 
 /**************************************************************************************
  * CONSTANTS
@@ -48,9 +48,9 @@ static uint16_t const HEIGTH   =  64;
  * NAMESPACES
  **************************************************************************************/
 
-using namespace spectre;
-using namespace spectre::hal;
-using namespace spectre::driver;
+using namespace snowfox;
+using namespace snowfox::hal;
+using namespace snowfox::driver;
 
 /**************************************************************************************
  * MAIN

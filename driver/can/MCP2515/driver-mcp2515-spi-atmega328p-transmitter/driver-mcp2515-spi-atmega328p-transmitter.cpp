@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -37,43 +37,43 @@
 
 #include <avr/io.h>
 
-#include <spectre/hal/avr/ATMEGA328P/Delay.h>
-#include <spectre/hal/avr/ATMEGA328P/DigitalInPin.h>
-#include <spectre/hal/avr/ATMEGA328P/DigitalOutPin.h>
-#include <spectre/hal/avr/ATMEGA328P/CriticalSection.h>
-#include <spectre/hal/avr/ATMEGA328P/InterruptController.h>
-#include <spectre/hal/avr/ATMEGA328P/ExternalInterruptController.h>
+#include <snowfox/hal/avr/ATMEGA328P/Delay.h>
+#include <snowfox/hal/avr/ATMEGA328P/DigitalInPin.h>
+#include <snowfox/hal/avr/ATMEGA328P/DigitalOutPin.h>
+#include <snowfox/hal/avr/ATMEGA328P/CriticalSection.h>
+#include <snowfox/hal/avr/ATMEGA328P/InterruptController.h>
+#include <snowfox/hal/avr/ATMEGA328P/ExternalInterruptController.h>
 
-#include <spectre/blox/hal/avr/ATMEGA328P/UART0.h>
-#include <spectre/blox/hal/avr/ATMEGA328P/SpiMaster.h>
+#include <snowfox/blox/hal/avr/ATMEGA328P/UART0.h>
+#include <snowfox/blox/hal/avr/ATMEGA328P/SpiMaster.h>
 
-#include <spectre/blox/driver/serial/SerialUart.h>
+#include <snowfox/blox/driver/serial/SerialUart.h>
 
-#include <spectre/driver/can/Can.h>
-#include <spectre/driver/can/interface/CanFrameBuffer.h>
+#include <snowfox/driver/can/Can.h>
+#include <snowfox/driver/can/interface/CanFrameBuffer.h>
 
-#include <spectre/driver/can/MCP2515/MCP2515_IoSpi.h>
-#include <spectre/driver/can/MCP2515/MCP2515_Debug.h>
-#include <spectre/driver/can/MCP2515/MCP2515_Control.h>
-#include <spectre/driver/can/MCP2515/MCP2515_CanControl.h>
-#include <spectre/driver/can/MCP2515/MCP2515_CanConfiguration.h>
+#include <snowfox/driver/can/MCP2515/MCP2515_IoSpi.h>
+#include <snowfox/driver/can/MCP2515/MCP2515_Debug.h>
+#include <snowfox/driver/can/MCP2515/MCP2515_Control.h>
+#include <snowfox/driver/can/MCP2515/MCP2515_CanControl.h>
+#include <snowfox/driver/can/MCP2515/MCP2515_CanConfiguration.h>
 
-#include <spectre/driver/can/MCP2515/events/MCP2515_EventCallback.h>
-#include <spectre/driver/can/MCP2515/events/MCP2515_onWakeup.h>
-#include <spectre/driver/can/MCP2515/events/MCP2515_onMessageError.h>
-#include <spectre/driver/can/MCP2515/events/MCP2515_onReceiveBufferFull.h>
-#include <spectre/driver/can/MCP2515/events/MCP2515_onTransmitBufferEmpty.h>
+#include <snowfox/driver/can/MCP2515/events/MCP2515_EventCallback.h>
+#include <snowfox/driver/can/MCP2515/events/MCP2515_onWakeup.h>
+#include <snowfox/driver/can/MCP2515/events/MCP2515_onMessageError.h>
+#include <snowfox/driver/can/MCP2515/events/MCP2515_onReceiveBufferFull.h>
+#include <snowfox/driver/can/MCP2515/events/MCP2515_onTransmitBufferEmpty.h>
 
-#include <spectre/trace/Trace.h>
-#include <spectre/trace/SerialTraceOutput.h>
+#include <snowfox/trace/Trace.h>
+#include <snowfox/trace/SerialTraceOutput.h>
 
 /**************************************************************************************
  * NAMESPACES
  **************************************************************************************/
 
-using namespace spectre;
-using namespace spectre::hal;
-using namespace spectre::driver;
+using namespace snowfox;
+using namespace snowfox::hal;
+using namespace snowfox::driver;
 
 /**************************************************************************************
  * GLOBAL CONSTANTS

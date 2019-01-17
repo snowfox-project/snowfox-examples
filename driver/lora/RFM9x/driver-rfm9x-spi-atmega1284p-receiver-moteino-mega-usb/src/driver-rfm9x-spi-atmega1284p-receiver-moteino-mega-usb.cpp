@@ -1,5 +1,5 @@
 /**
- * Spectre is a modular RTOS with extensive IO support.
+ * Snowfox is a modular RTOS with extensive IO support.
  * Copyright (C) 2017 - 2019 Alexander Entinger / LXRobotics GmbH
  *
  * This program is free software: you can redistribute it and/or modify
@@ -43,38 +43,38 @@
 
 #include <avr/io.h>
 
-#include <spectre/hal/avr/ATMEGA1284P/Delay.h>
-#include <spectre/hal/avr/ATMEGA1284P/DigitalInPin.h>
-#include <spectre/hal/avr/ATMEGA1284P/DigitalOutPin.h>
-#include <spectre/hal/avr/ATMEGA1284P/CriticalSection.h>
-#include <spectre/hal/avr/ATMEGA1284P/InterruptController.h>
-#include <spectre/hal/avr/ATMEGA1284P/ExternalInterruptController.h>
+#include <snowfox/hal/avr/ATMEGA1284P/Delay.h>
+#include <snowfox/hal/avr/ATMEGA1284P/DigitalInPin.h>
+#include <snowfox/hal/avr/ATMEGA1284P/DigitalOutPin.h>
+#include <snowfox/hal/avr/ATMEGA1284P/CriticalSection.h>
+#include <snowfox/hal/avr/ATMEGA1284P/InterruptController.h>
+#include <snowfox/hal/avr/ATMEGA1284P/ExternalInterruptController.h>
 
-#include <spectre/blox/hal/avr/ATMEGA1284P/UART0.h>
-#include <spectre/blox/hal/avr/ATMEGA1284P/SpiMaster.h>
+#include <snowfox/blox/hal/avr/ATMEGA1284P/UART0.h>
+#include <snowfox/blox/hal/avr/ATMEGA1284P/SpiMaster.h>
 
-#include <spectre/blox/driver/serial/SerialUart.h>
+#include <snowfox/blox/driver/serial/SerialUart.h>
 
-#include <spectre/driver/lora/RFM9x/RFM9x.h>
-#include <spectre/driver/lora/RFM9x/RFM9x_IoSpi.h>
-#include <spectre/driver/lora/RFM9x/RFM9x_Status.h>
-#include <spectre/driver/lora/RFM9x/RFM9x_Control.h>
-#include <spectre/driver/lora/RFM9x/RFM9x_Configuration.h>
+#include <snowfox/driver/lora/RFM9x/RFM9x.h>
+#include <snowfox/driver/lora/RFM9x/RFM9x_IoSpi.h>
+#include <snowfox/driver/lora/RFM9x/RFM9x_Status.h>
+#include <snowfox/driver/lora/RFM9x/RFM9x_Control.h>
+#include <snowfox/driver/lora/RFM9x/RFM9x_Configuration.h>
 
-#include <spectre/driver/lora/RFM9x/events/DIO0/RFM9x_Dio0EventCallback.h>
-#include <spectre/driver/lora/RFM9x/events/DIO0/RFM9x_onTxDoneCallback.h>
-#include <spectre/driver/lora/RFM9x/events/DIO0/RFM9x_onRxDoneCallback.h>
-#include <spectre/driver/lora/RFM9x/events/DIO0/RFM9x_onCadDoneCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO0/RFM9x_Dio0EventCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO0/RFM9x_onTxDoneCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO0/RFM9x_onRxDoneCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO0/RFM9x_onCadDoneCallback.h>
 
-#include <spectre/driver/lora/RFM9x/events/DIO1/RFM9x_Dio1EventCallback.h>
-#include <spectre/driver/lora/RFM9x/events/DIO1/RFM9x_onRxTimeoutCallback.h>
-#include <spectre/driver/lora/RFM9x/events/DIO1/RFM9x_onCadDetectedCallback.h>
-#include <spectre/driver/lora/RFM9x/events/DIO1/RFM9x_onFhssChangeChannelCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO1/RFM9x_Dio1EventCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO1/RFM9x_onRxTimeoutCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO1/RFM9x_onCadDetectedCallback.h>
+#include <snowfox/driver/lora/RFM9x/events/DIO1/RFM9x_onFhssChangeChannelCallback.h>
 
-#include <spectre/os/event/Event.h>
+#include <snowfox/os/event/Event.h>
 
-#include <spectre/trace/Trace.h>
-#include <spectre/trace/SerialTraceOutput.h>
+#include <snowfox/trace/Trace.h>
+#include <snowfox/trace/SerialTraceOutput.h>
 
 #include <RFM9x_Dio1EventCallbackAdapter.h>
 
@@ -82,9 +82,9 @@
  * NAMESPACES
  **************************************************************************************/
 
-using namespace spectre;
-using namespace spectre::hal;
-using namespace spectre::driver;
+using namespace snowfox;
+using namespace snowfox::hal;
+using namespace snowfox::driver;
 
 /**************************************************************************************
  * CONSTANTS

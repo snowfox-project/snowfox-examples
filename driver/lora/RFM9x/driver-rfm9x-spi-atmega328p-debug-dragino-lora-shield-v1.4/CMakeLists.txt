@@ -31,7 +31,7 @@ add_executable(
 
 target_link_libraries(
   ${TARGET}
-  spectre-atmega328p
+  snowfox-atmega328p
 )
 
 set_target_properties(
