@@ -17,7 +17,7 @@
  */
 
 /**************************************************************************************
- * This example programm is tailored for usage with Arduino Uno
+ * This example program is tailored for usage with Arduino Uno
  * and Seedstudio CAN Bus Shield V2.0
  *
  * Electrical interface:

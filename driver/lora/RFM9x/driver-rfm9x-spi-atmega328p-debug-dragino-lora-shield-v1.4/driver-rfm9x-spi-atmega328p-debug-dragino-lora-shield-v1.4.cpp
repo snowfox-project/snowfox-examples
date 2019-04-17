@@ -17,7 +17,7 @@
  */
 
 /**************************************************************************************
- * This example programm is tailored for usage with Arduino Uno
+ * This example program is tailored for usage with Arduino Uno
  * and Dragino LoRa Shield V1.4
  *
  * Electrical interface:

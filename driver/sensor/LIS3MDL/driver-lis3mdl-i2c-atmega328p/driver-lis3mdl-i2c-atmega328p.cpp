@@ -89,7 +89,7 @@ int main()
   uint8_t operation_mode_z  = static_cast<uint8_t>(sensor::LIS3MDL::interface::OperationMode_Z::UHP                 );
   uint8_t output_data_rate  = static_cast<uint8_t>(sensor::LIS3MDL::interface::OutputDataRate::ODR_10_Hz            );
   uint8_t full_scale_range  = static_cast<uint8_t>(sensor::LIS3MDL::interface::FullScaleRange::FS_plus_minus_4_Gauss);
-  uint8_t conversion_mode   = static_cast<uint8_t>(sensor::LIS3MDL::interface::ConversionMode::CONTINOUS            );
+  uint8_t conversion_mode   = static_cast<uint8_t>(sensor::LIS3MDL::interface::ConversionMode::CONTINUOUS           );
 
   lis3mdl.open();
 
