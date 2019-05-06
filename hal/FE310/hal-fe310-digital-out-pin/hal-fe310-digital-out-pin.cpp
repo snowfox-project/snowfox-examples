@@ -30,6 +30,7 @@
  **************************************************************************************/
 
 #include <snowfox/hal/riscv64/FE310/Io.h>
+#include <snowfox/hal/riscv64/FE310/Clock.h>
 #include <snowfox/hal/riscv64/FE310/Delay.h>
 #include <snowfox/hal/riscv64/FE310/DigitalOutPin.h>
 
@@ -43,15 +44,19 @@ using namespace snowfox::hal;
  * CONSTANTS
  **************************************************************************************/
 
-static uint8_t const LED_RED_GPIO_NUMBER   = 22;
-static uint8_t const LED_GREEN_GPIO_NUMBER = 19;
-static uint8_t const LED_BLUE_GPIO_NUMBER  = 21;
+static uint32_t const HFXOSCIN_FREQ_Hz      =  16000000UL;
+static uint32_t const CORECLK_FREQ_Hz       = 200000000UL;
+
+static uint8_t  const LED_RED_GPIO_NUMBER   = 22;
+static uint8_t  const LED_GREEN_GPIO_NUMBER = 19;
+static uint8_t  const LED_BLUE_GPIO_NUMBER  = 21;
 
 /**************************************************************************************
  * GLOBAL VARIABLES
  **************************************************************************************/
 
 FE310::Delay         delay;
+FE310::Clock         clock    (&PRCI_HFXOSCCFG, &PRCI_PLLCFG, &PRCI_PLLOUTDIV, HFXOSCIN_FREQ_Hz);
 FE310::DigitalOutPin led_red  (&GPIO0_INPUT_EN, &GPIO0_OUTPUT_EN, &GPIO0_IOF_EN, &GPIO0_OUTPUT_VAL, LED_RED_GPIO_NUMBER  );
 FE310::DigitalOutPin led_green(&GPIO0_INPUT_EN, &GPIO0_OUTPUT_EN, &GPIO0_IOF_EN, &GPIO0_OUTPUT_VAL, LED_GREEN_GPIO_NUMBER);
 FE310::DigitalOutPin led_blue (&GPIO0_INPUT_EN, &GPIO0_OUTPUT_EN, &GPIO0_IOF_EN, &GPIO0_OUTPUT_VAL, LED_BLUE_GPIO_NUMBER );
@@ -62,6 +67,8 @@ FE310::DigitalOutPin led_blue (&GPIO0_INPUT_EN, &GPIO0_OUTPUT_EN, &GPIO0_IOF_EN,
 
 int main()
 {
+  clock.setClockFreq(static_cast<uint8_t>(FE310::ClockId::coreclk), CORECLK_FREQ_Hz);
+
   for(uint8_t cnt = 0;; cnt++)
   {
     cnt = cnt % 8;
