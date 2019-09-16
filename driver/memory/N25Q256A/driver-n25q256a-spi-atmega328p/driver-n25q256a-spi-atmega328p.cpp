@@ -161,22 +161,22 @@ int main()
    ************************************************************************************/
 
   if(!n25q256a.open()) {
-    trace.print(trace::Level::Error, "N25Q256A::open() failed");
+    trace.println(trace::Level::Error, "N25Q256A::open() failed");
   }
 
   memory::NorDriverCapabilities n25q256a_cap;
   if(!n25q256a.ioctl(memory::IOCTL_GET_CAPABILITIES, reinterpret_cast<void*>(&n25q256a_cap))) {
-    trace.print(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_CAPABILITIES) failed");
+    trace.println(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_CAPABILITIES) failed");
   } else {
-    trace.print(trace::Level::Info,
-                "N25Q256A read block size:        %d\r\n" \
-                "N25Q256A prog block size:        %d\r\n" \
-                "N25Q256A erase block size:       %d\r\n" \
-                "N25Q256A number of erase blocks: %d\r\n",
-                n25q256a_cap.read_size, 
-                n25q256a_cap.prog_size,
-                n25q256a_cap.erase_size,
-                n25q256a_cap.erase_block_num);
+    trace.println(trace::Level::Info,
+                  "N25Q256A read block size:        %d\r\n" \
+                  "N25Q256A prog block size:        %d\r\n" \
+                  "N25Q256A erase block size:       %d\r\n" \
+                  "N25Q256A number of erase blocks: %d",
+                  n25q256a_cap.read_size, 
+                  n25q256a_cap.prog_size,
+                  n25q256a_cap.erase_size,
+                  n25q256a_cap.erase_block_num);
   } 
 
   uint8_t read_buf[20] = {
@@ -203,41 +203,41 @@ int main()
   {
     /* READ ***************************************************************************/
     if(!n25q256a_read(&n25q256a, read_buf, 20)) {
-      trace.print(trace::Level::Error, "Reading 16 bytes from N25Q256A failed\r\n");
+      trace.println(trace::Level::Error, "Reading 16 bytes from N25Q256A failed");
     } else {
-      trace.print(trace::Level::Info, "16 bytes successfully read from N25Q256A:\r\n");
+      trace.println(trace::Level::Info, "16 bytes successfully read from N25Q256A:");
       for(uint8_t i = 4; i < 20; i++) {
         trace.print(trace::Level::Info, "%02X ", read_buf[i]);
       }
-      trace.print(trace::Level::Info, "\r\n ");
+      trace.println(trace::Level::Info);
     }
     /* WRITE **************************************************************************/
     if(!n25q256a_write(&n25q256a, write_buf, 20)) {
-      trace.print(trace::Level::Error, "Writing 16 bytes to N25Q256A failed\r\n");
+      trace.println(trace::Level::Error, "Writing 16 bytes to N25Q256A failed");
     }
     /* READ ***************************************************************************/
     if(!n25q256a_read(&n25q256a, read_buf, 20)) {
-      trace.print(trace::Level::Error, "Reading 16 bytes from N25Q256A failed\r\n");
+      trace.println(trace::Level::Error, "Reading 16 bytes from N25Q256A failed");
     } else {
-      trace.print(trace::Level::Info, "16 bytes successfully read from N25Q256A:\r\n");
+      trace.println(trace::Level::Info, "16 bytes successfully read from N25Q256A:");
       for(uint8_t i = 4; i < 20; i++) {
         trace.print(trace::Level::Info, "%02X ", read_buf[i]);
       }
-      trace.print(trace::Level::Info, "\r\n ");
+      trace.println(trace::Level::Info);
     }
     /* ERASE **************************************************************************/
     if(!n25q256a_erase(&n25q256a, 1)) {
-      trace.print(trace::Level::Error, "Erasing of N25Q256A subsector '1' failed\r\n");
+      trace.println(trace::Level::Error, "Erasing of N25Q256A subsector '1' failed");
     }
     /* READ ***************************************************************************/
     if(!n25q256a_read(&n25q256a, read_buf, 20)) {
-      trace.print(trace::Level::Error, "Reading 16 bytes from N25Q256A failed\r\n");
+      trace.println(trace::Level::Error, "Reading 16 bytes from N25Q256A failedln");
     } else {
-      trace.print(trace::Level::Info, "16 bytes successfully read from N25Q256A:\r\n");
+      trace.println(trace::Level::Info, "16 bytes successfully read from N25Q256A:");
       for(uint8_t i = 4; i < 20; i++) {
         trace.print(trace::Level::Info, "%02X ", read_buf[i]);
       }
-      trace.print(trace::Level::Info, "\r\n ");
+      trace.println(trace::Level::Info);
     }
   }
 

@@ -91,7 +91,7 @@ int main()
 
   for(uint32_t cnt = 0;; cnt++)
   {
-    trace.print(trace::Level::Debug, "( %08X ) Hello ATMEGA32U4\r\n", cnt);
+    trace.println(trace::Level::Debug, "( %08X ) Hello ATMEGA32U4", cnt);
   }
 
   return 0;

@@ -198,11 +198,11 @@ int main()
 
     ssize_t const ret_code = rfm9x().write(msg, msg_len);
 
-    if     (ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::ParameterError      )) trace.print(trace::Level::Debug, "ERROR   - ParameterError\r\n");
-    else if(ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::TxFifoSizeExceeded  )) trace.print(trace::Level::Debug, "ERROR   - TxFifoSizeExceeded\r\n");
-    else if(ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::ModemBusy_NotSleep  )) trace.print(trace::Level::Debug, "ERROR   - ModemBusy_NotSleep\r\n");
-    else if(ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::ModemBusy_NotStandby)) trace.print(trace::Level::Debug, "ERROR   - ModemBusy_NotStandby\r\n");
-    else                                                                                       trace.print(trace::Level::Debug, "SUCCESS - %s", msg);
+    if     (ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::ParameterError      )) trace.println(trace::Level::Debug, "ERROR   - ParameterError");
+    else if(ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::TxFifoSizeExceeded  )) trace.println(trace::Level::Debug, "ERROR   - TxFifoSizeExceeded");
+    else if(ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::ModemBusy_NotSleep  )) trace.println(trace::Level::Debug, "ERROR   - ModemBusy_NotSleep");
+    else if(ret_code == static_cast<ssize_t>(lora::RFM9x::RetCodeWrite::ModemBusy_NotStandby)) trace.println(trace::Level::Debug, "ERROR   - ModemBusy_NotStandby");
+    else                                                                                       trace.println(trace::Level::Debug, "SUCCESS - %s", msg);
 
     delay.delay_ms(1000);
   }

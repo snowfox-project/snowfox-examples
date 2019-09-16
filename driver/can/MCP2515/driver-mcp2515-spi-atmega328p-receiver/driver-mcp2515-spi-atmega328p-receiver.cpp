@@ -203,7 +203,7 @@ int main()
       {
         trace.print(trace::Level::Debug, "%02X ", frame.data[b]);
       }
-      trace.print(trace::Level::Debug, "\r\n");
+      trace.println(trace::Level::Debug);
     }
   }
 
