@@ -24,10 +24,10 @@
  * + Arduino compatible pinout + can be operated either at 5V or at 3V3).
  *
  * Electrical interface:
- *   (1) ~CS  = D10 = PB2
- *   (3) MISO = D12 = PB4
- *   (2) MOSI = D11 = PB3
- *   (4) SCK  = D13 = PB5
+ *   Pmod SF3 Pin (1) = ~CS  = D10 = PB2
+ *   Pmod SF3 Pin (3) = MISO = D12 = PB4
+ *   Pmod SF3 Pin (2) = MOSI = D11 = PB3
+ *   Pmod SF3 Pin (4) = SCK  = D13 = PB5
  *
  * Upload via avrdude
  *   avrdude -p atmega328p -c avrisp2 -e -U flash:w:driver-n25q256a-spi-atmega328p
@@ -168,15 +168,10 @@ int main()
   if(!n25q256a.ioctl(memory::IOCTL_GET_CAPABILITIES, reinterpret_cast<void*>(&n25q256a_cap))) {
     trace.println(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_CAPABILITIES) failed");
   } else {
-    trace.println(trace::Level::Info,
-                  "N25Q256A read block size:        %d\r\n" \
-                  "N25Q256A prog block size:        %d\r\n" \
-                  "N25Q256A erase block size:       %d\r\n" \
-                  "N25Q256A number of erase blocks: %d",
-                  n25q256a_cap.read_size, 
-                  n25q256a_cap.prog_size,
-                  n25q256a_cap.erase_size,
-                  n25q256a_cap.erase_block_num);
+    trace.println(trace::Level::Info, "N25Q256A read block size:        %d", n25q256a_cap.read_size);
+    trace.println(trace::Level::Info, "N25Q256A prog block size:        %d", n25q256a_cap.prog_size);
+    trace.println(trace::Level::Info, "N25Q256A erase block size:       %d", n25q256a_cap.erase_size);
+    trace.println(trace::Level::Info, "N25Q256A number of erase blocks: %d", n25q256a_cap.erase_block_num);
   } 
 
   uint8_t read_buf[20] = {
