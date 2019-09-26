@@ -190,14 +190,14 @@ int main()
 
   for(;;) { delay.delay_ms(1); }
 
-  memory::NorDriverCapabilities n25q256a_cap;
-  if(!n25q256a.ioctl(memory::IOCTL_GET_CAPABILITIES, reinterpret_cast<void*>(&n25q256a_cap))) {
-    trace.println(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_CAPABILITIES) failed");
+  memory::NorFlashInfo n25q256a_flash_info;
+  if(!n25q256a.ioctl(memory::IOCTL_GET_FLASH_INFO, reinterpret_cast<void*>(&n25q256a_flash_info))) {
+    trace.println(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_FLASH_INFO) failed");
   } else {
-    trace.println(trace::Level::Info, "N25Q256A read block size:        %d", n25q256a_cap.read_size);
-    trace.println(trace::Level::Info, "N25Q256A prog block size:        %d", n25q256a_cap.prog_size);
-    trace.println(trace::Level::Info, "N25Q256A erase block size:       %d", n25q256a_cap.erase_size);
-    trace.println(trace::Level::Info, "N25Q256A number of erase blocks: %d", n25q256a_cap.block_count);
+    trace.println(trace::Level::Info, "N25Q256A read block size:        %d", n25q256a_flash_info.read_size);
+    trace.println(trace::Level::Info, "N25Q256A prog block size:        %d", n25q256a_flash_info.prog_size);
+    trace.println(trace::Level::Info, "N25Q256A erase block size:       %d", n25q256a_flash_info.erase_size);
+    trace.println(trace::Level::Info, "N25Q256A number of erase blocks: %d", n25q256a_flash_info.block_count);
   }
 
   delay.delay_ms(1000);
