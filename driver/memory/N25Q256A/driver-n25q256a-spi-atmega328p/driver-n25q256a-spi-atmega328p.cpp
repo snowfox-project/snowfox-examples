@@ -40,6 +40,7 @@
 #include <avr/io.h>
 
 #include <snowfox/hal/avr/ATMEGA328P/Flash.h>
+#include <snowfox/hal/avr/ATMEGA328P/Delay.h>
 #include <snowfox/hal/avr/ATMEGA328P/DigitalInPin.h>
 #include <snowfox/hal/avr/ATMEGA328P/DigitalOutPin.h>
 #include <snowfox/hal/avr/ATMEGA328P/CriticalSection.h>
@@ -51,9 +52,13 @@
 #include <snowfox/blox/driver/serial/SerialUart.h>
 
 #include <snowfox/driver/memory/N25Q256A/N25Q256A.h>
+#include <snowfox/driver/memory/N25Q256A/N25Q256A_Debug.h>
 #include <snowfox/driver/memory/N25Q256A/N25Q256A_IoSpi.h>
+#include <snowfox/driver/memory/N25Q256A/N25Q256A_Status.h>
 #include <snowfox/driver/memory/N25Q256A/N25Q256A_Control.h>
 #include <snowfox/driver/memory/N25Q256A/N25Q256A_Configuration.h>
+
+#include <snowfox/driver/util/jedec/JedecCode.h>
 
 #include <snowfox/trace/Trace.h>
 #include <snowfox/trace/SerialTraceOutput.h>
@@ -81,9 +86,7 @@ static uint32_t                    const N25Q256A_SPI_PRESCALER      = 16;      
  * FUNCTION DECLARATION
  **************************************************************************************/
 
-bool n25q256a_read (memory::NorDriver * n25q256a, uint8_t * read_buf, uint32_t const read_buf_size);
-bool n25q256a_write(memory::NorDriver * n25q256a, uint8_t const * write_buf, uint32_t const write_buf_size);
-bool n25q256a_erase(memory::NorDriver * n25q256a, uint32_t const erase_block_num);
+void print_buffer(trace::Trace & trace, char const * str, uint8_t const * buf, uint16_t const buf_size);
 
 /**************************************************************************************
  * MAIN
@@ -96,6 +99,7 @@ int main()
    ************************************************************************************/
 
   ATMEGA328P::Flash               flash;
+  ATMEGA328P::Delay               delay;
 
   ATMEGA328P::InterruptController int_ctrl  (&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
   ATMEGA328P::CriticalSection     crit_sec  (&SREG);
@@ -154,15 +158,37 @@ int main()
   memory::N25Q256A::N25Q256A_IoSpi         n25q256a_spi    (spi_master(), n25q256a_cs);
   memory::N25Q256A::N25Q256A_Configuration n25q256a_config (n25q256a_spi);
   memory::N25Q256A::N25Q256A_Control       n25q256a_control(n25q256a_spi);
-  memory::N25Q256A::N25Q256A               n25q256a        (n25q256a_config, n25q256a_control);
+  memory::N25Q256A::N25Q256A_Status        n25q256a_status (n25q256a_spi);
+  memory::N25Q256A::N25Q256A               n25q256a        (n25q256a_config, n25q256a_control, n25q256a_status);
 
   /************************************************************************************
    * APPLICATION
    ************************************************************************************/
 
+  delay.delay_ms(1000);
+
+  memory::N25Q256A::N25Q256A_Debug::debug_dumpAllRegs(trace, n25q256a_spi);
+
   if(!n25q256a.open()) {
-    trace.println(trace::Level::Error, "N25Q256A::open() failed");
+    trace.println(trace::Level::Error, "N25Q256A::open() ERROR");
+  } else {
+    trace.println(trace::Level::Error, "N25Q256A::open() OK");
   }
+
+  memory::N25Q256A::N25Q256A_Debug::debug_dumpAllRegs(trace, n25q256a_spi);
+
+  driver::util::jedec::JedecCode n25q256a_jedec_code;
+  if(!n25q256a.ioctl(memory::IOCTL_GET_JEDEC_CODE, reinterpret_cast<void*>(&n25q256a_jedec_code))) {
+    trace.println(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_JEDEC_CODE) failed");
+  } else {
+    trace.println(trace::Level::Debug, 
+                  "DEVICE ID = %02X %02X %02X",
+                  n25q256a_jedec_code.deviceId0(),
+                  n25q256a_jedec_code.deviceId1(),
+                  n25q256a_jedec_code.deviceId2());
+  }
+
+  for(;;) { delay.delay_ms(1); }
 
   memory::NorDriverCapabilities n25q256a_cap;
   if(!n25q256a.ioctl(memory::IOCTL_GET_CAPABILITIES, reinterpret_cast<void*>(&n25q256a_cap))) {
@@ -171,72 +197,68 @@ int main()
     trace.println(trace::Level::Info, "N25Q256A read block size:        %d", n25q256a_cap.read_size);
     trace.println(trace::Level::Info, "N25Q256A prog block size:        %d", n25q256a_cap.prog_size);
     trace.println(trace::Level::Info, "N25Q256A erase block size:       %d", n25q256a_cap.erase_size);
-    trace.println(trace::Level::Info, "N25Q256A number of erase blocks: %d", n25q256a_cap.erase_block_num);
-  } 
+    trace.println(trace::Level::Info, "N25Q256A number of erase blocks: %d", n25q256a_cap.block_count);
+  }
 
-  uint8_t read_buf[20] = {
-    /* read address */
-    0x00, 0x00, 0x00, 0xFF,
-    /* actual read buffer */
+  delay.delay_ms(1000);
+
+  uint8_t read_buf[16] = {
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00,
     0x00, 0x00, 0x00, 0x00
   };
 
-  uint8_t write_buf[20] = {
-    /* read address */
-    0x00, 0x00, 0x00, 0xFF,
-    /* actual read buffer */
+  uint8_t const write_buf[16] = {
     0xCA, 0xFE, 0xCA, 0xFE,
     0xDE, 0xAD, 0xBE, 0xEF,
     0xAA, 0x55, 0xAA, 0x55,
     0xCA, 0xFF, 0xEE, 0xEE
   };
 
-  for(;;)
-  {
-    /* READ ***************************************************************************/
-    if(!n25q256a_read(&n25q256a, read_buf, 20)) {
-      trace.println(trace::Level::Error, "Reading 16 bytes from N25Q256A failed");
-    } else {
-      trace.println(trace::Level::Info, "16 bytes successfully read from N25Q256A:");
-      for(uint8_t i = 4; i < 20; i++) {
-        trace.print(trace::Level::Info, "%02X ", read_buf[i]);
-      }
-      trace.println(trace::Level::Info);
-    }
-    /* WRITE **************************************************************************/
-    if(!n25q256a_write(&n25q256a, write_buf, 20)) {
-      trace.println(trace::Level::Error, "Writing 16 bytes to N25Q256A failed");
-    }
-    /* READ ***************************************************************************/
-    if(!n25q256a_read(&n25q256a, read_buf, 20)) {
-      trace.println(trace::Level::Error, "Reading 16 bytes from N25Q256A failed");
-    } else {
-      trace.println(trace::Level::Info, "16 bytes successfully read from N25Q256A:");
-      for(uint8_t i = 4; i < 20; i++) {
-        trace.print(trace::Level::Info, "%02X ", read_buf[i]);
-      }
-      trace.println(trace::Level::Info);
-    }
-    /* ERASE **************************************************************************/
-    if(!n25q256a_erase(&n25q256a, 1)) {
-      trace.println(trace::Level::Error, "Erasing of N25Q256A subsector '1' failed");
-    }
-    /* READ ***************************************************************************/
-    if(!n25q256a_read(&n25q256a, read_buf, 20)) {
-      trace.println(trace::Level::Error, "Reading 16 bytes from N25Q256A failedln");
-    } else {
-      trace.println(trace::Level::Info, "16 bytes successfully read from N25Q256A:");
-      for(uint8_t i = 4; i < 20; i++) {
-        trace.print(trace::Level::Info, "%02X ", read_buf[i]);
-      }
-      trace.println(trace::Level::Info);
-    }
+  /* READ ***************************************************************************/
+  if(n25q256a.read(0, 0, read_buf, 16) != 16) {
+    trace.println(trace::Level::Error, "[ERR] READ");
+  } else {
+    print_buffer(trace, "[OK] READ (16 bytes) = ", read_buf, 16);
+  }
+    
+  /* PROG ***************************************************************************/
+  if(n25q256a.prog(0, 0, write_buf, 16) != 16) {
+    trace.println(trace::Level::Error, "[ERR] PROG");
+  } else {
+    print_buffer(trace, "[OK] PROG (16 bytes) = ", write_buf, 16);
   }
 
+  /* READ ***************************************************************************/
+  if(n25q256a.read(0, 0, read_buf, 16) != 16) {
+    trace.println(trace::Level::Error, "[ERR] READ");
+  } else {
+    print_buffer(trace, "[OK] READ (16 bytes) = ", read_buf, 16);
+  }
+  
+  /* ERASE **************************************************************************/
+  if(!n25q256a.erase(0)) {
+    trace.println(trace::Level::Error, "[ERR] ERASE");
+  } else {
+    trace.println(trace::Level::Info, "[OK] ERASE");
+  }
+  
+  /* READ ***************************************************************************/
+  if(n25q256a.read(0, 0, read_buf, 16) != 16) {
+    trace.println(trace::Level::Error, "[ERR] READ");
+  } else {
+    print_buffer(trace, "[OK] READ (16 bytes) = ", read_buf, 16);
+  }
+
+  /************************************************************************************
+   * CLEANUP
+   ************************************************************************************/
+
   n25q256a.close();
+
+  /* Loop forever */
+  for(;;) { delay.delay_ms(1); }
 
   return 0;
 }
@@ -245,17 +267,11 @@ int main()
  * FUNCTION IMPLEMENTATION
  **************************************************************************************/
 
-bool n25q256a_read(memory::NorDriver * n25q256a, uint8_t * read_buf, uint32_t const read_buf_size)
+void print_buffer(trace::Trace & trace, char const * str, uint8_t const * buf, uint16_t const buf_size)
 {
-  return (n25q256a->read(read_buf, static_cast<ssize_t>(read_buf_size)) == static_cast<ssize_t>(read_buf_size));
-}
-
-bool n25q256a_write(memory::NorDriver * n25q256a, uint8_t const * write_buf, uint32_t const write_buf_size)
-{
-  return (n25q256a->write(write_buf, static_cast<ssize_t>(write_buf_size)) == static_cast<ssize_t>(write_buf_size));
-}
-
-bool n25q256a_erase(memory::NorDriver * n25q256a, uint32_t const erase_block_num)
-{
-  return n25q256a->ioctl(memory::IOCTL_ERASE, (void*)&erase_block_num);
+  trace.print(trace::Level::Info, "%s", str);
+  for(uint16_t i = 0; i < buf_size; i++) {
+    trace.print(trace::Level::Info, "%02X ", buf[i]);
+  }
+  trace.println(trace::Level::Info);
 }
