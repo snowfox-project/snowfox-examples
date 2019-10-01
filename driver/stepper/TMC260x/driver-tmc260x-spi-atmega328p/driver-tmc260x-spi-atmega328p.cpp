@@ -79,7 +79,6 @@ int main()
   blox::ATMEGA328P::SpiMaster     spi_master    (&SPCR,
                                                  &SPSR,
                                                  &SPDR,
-                                                 crit_sec,
                                                  int_ctrl,
                                                  TMC26x_SPI_MODE,
                                                  TMC26x_SPI_BIT_ORDER,

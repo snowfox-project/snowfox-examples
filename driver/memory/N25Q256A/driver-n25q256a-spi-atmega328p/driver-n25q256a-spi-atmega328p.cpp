@@ -128,7 +128,6 @@ int main()
   blox::ATMEGA328P::SpiMaster     spi_master(&SPCR,
                                              &SPSR,
                                              &SPDR,
-                                             crit_sec,
                                              int_ctrl,
                                              N25Q256A_SPI_MODE,
                                              N25Q256A_SPI_BIT_ORDER,

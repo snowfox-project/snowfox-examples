@@ -62,7 +62,6 @@ int main()
                                                &TWDR,
                                                &TWSR,
                                                &TWBR,
-                                               crit_sec,
                                                int_ctrl,
                                                hal::interface::I2cClock::F_100_kHz);
 

@@ -124,7 +124,6 @@ int main()
   blox::ATMEGA328P::SpiMaster                   spi_master  (&SPCR,
                                                              &SPSR,
                                                              &SPDR,
-                                                             crit_sec,
                                                              int_ctrl,
                                                              MCP2515_SPI_MODE,
                                                              MCP2515_SPI_BIT_ORDER,

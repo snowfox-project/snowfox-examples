@@ -127,7 +127,6 @@ int main()
   blox::ATMEGA328P::SpiMaster spi_master(&SPCR,
                                          &SPSR,
                                          &SPDR,
-                                         crit_sec,
                                          int_ctrl,
                                          RFM9x_SPI_MODE,
                                          RFM9x_SPI_BIT_ORDER,
@@ -171,8 +170,7 @@ int main()
   /* RFM95 ****************************************************************************/
   lora::RFM9x::RFM9x_IoSpi rfm9x_spi(spi_master(), rfm9x_cs);
 
-  blox::RFM9x rfm9x(crit_sec,
-                    ext_int_ctrl,
+  blox::RFM9x rfm9x(ext_int_ctrl,
                     ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT0),
                     ATMEGA328P::toExtIntNum(ATMEGA328P::ExternalInterrupt::EXTERNAL_INT1),
                     rfm9x_spi,

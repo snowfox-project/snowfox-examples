@@ -111,7 +111,6 @@ int main()
   blox::ATMEGA328P::SpiMaster     spi_master(&SPCR,
                                              &SPSR,
                                              &SPDR,
-                                             crit_sec,
                                              int_ctrl,
                                              RFM9x_SPI_MODE,
                                              RFM9x_SPI_BIT_ORDER,

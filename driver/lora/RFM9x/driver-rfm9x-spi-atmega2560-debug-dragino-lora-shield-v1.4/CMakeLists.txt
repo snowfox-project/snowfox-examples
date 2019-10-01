@@ -18,7 +18,7 @@ set(CMAKE_CXX_COMPILER avr-g++)
 
 ##########################################################################
 
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-mmcu=atmega2560 -DF_CPU=16000000UL -std=c++11 -Os -Wall -pedantic -pedantic-errors -funsigned-char -funsigned-bitfields -fshort-enums -ffunction-sections -fdata-sections -fno-exceptions")
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-mmcu=atmega2560 -DMCU_ARCH_avr -DMCU_TYPE_atmega2560 -DF_CPU=16000000UL -std=c++11 -Os -Wall -pedantic -pedantic-errors -funsigned-char -funsigned-bitfields -fshort-enums -ffunction-sections -fdata-sections -fno-exceptions")
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-Wl,--relax,--gc-sections")
 
 ##########################################################################

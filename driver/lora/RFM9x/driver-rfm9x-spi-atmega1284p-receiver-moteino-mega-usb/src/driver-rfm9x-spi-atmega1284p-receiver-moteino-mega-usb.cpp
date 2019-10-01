@@ -136,7 +136,6 @@ int main()
   blox::ATMEGA1284P::SpiMaster                   spi_master  (&SPCR,
                                                               &SPSR,
                                                               &SPDR,
-                                                              crit_sec,
                                                               int_ctrl,
                                                               RFM9x_SPI_MODE,
                                                               RFM9x_SPI_BIT_ORDER,
@@ -181,9 +180,9 @@ int main()
   lora::RFM9x::RFM9x_Control                      rfm9x_control                         (rfm9x_spi                 );
   lora::RFM9x::RFM9x_Status                       rfm9x_status                          (rfm9x_spi                 );
 
-  os::Event                                       rfm9x_tx_done_event                   (crit_sec);
-  os::Event                                       rfm9x_rx_done_event                   (crit_sec);
-  os::Event                                       rfm9x_rx_timeout_event                (crit_sec);
+  os::Event                                       rfm9x_tx_done_event;
+  os::Event                                       rfm9x_rx_done_event;
+  os::Event                                       rfm9x_rx_timeout_event;
 
   lora::RFM9x::RFM9x_onTxDoneCallback             rfm9x_on_tx_done_callback             (rfm9x_tx_done_event);
   lora::RFM9x::RFM9x_onRxDoneCallback             rfm9x_on_rx_done_callback             (rfm9x_rx_done_event);
