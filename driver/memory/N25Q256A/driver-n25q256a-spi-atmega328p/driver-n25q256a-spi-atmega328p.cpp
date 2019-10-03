@@ -156,15 +156,13 @@ int main()
   /* N25Q256A *************************************************************************/
   memory::N25Q256A::N25Q256A_IoSpi         n25q256a_spi    (spi_master(), n25q256a_cs);
   memory::N25Q256A::N25Q256A_Configuration n25q256a_config (n25q256a_spi);
-  memory::N25Q256A::N25Q256A_Control       n25q256a_control(n25q256a_spi);
+  memory::N25Q256A::N25Q256A_Control       n25q256a_control(n25q256a_spi, delay);
   memory::N25Q256A::N25Q256A_Status        n25q256a_status (n25q256a_spi);
   memory::N25Q256A::N25Q256A               n25q256a        (n25q256a_config, n25q256a_control, n25q256a_status);
 
   /************************************************************************************
    * APPLICATION
    ************************************************************************************/
-
-  delay.delay_ms(1000);
 
   memory::N25Q256A::N25Q256A_Debug::debug_dumpAllRegs(trace, n25q256a_spi);
 
@@ -187,8 +185,6 @@ int main()
                   n25q256a_jedec_code.deviceId2());
   }
 
-  for(;;) { delay.delay_ms(1); }
-
   memory::NorFlashInfo n25q256a_flash_info;
   if(!n25q256a.ioctl(memory::IOCTL_GET_FLASH_INFO, reinterpret_cast<void*>(&n25q256a_flash_info))) {
     trace.println(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_FLASH_INFO) failed");
@@ -198,8 +194,6 @@ int main()
     trace.println(trace::Level::Info, "N25Q256A erase block size:       %d", n25q256a_flash_info.erase_size);
     trace.println(trace::Level::Info, "N25Q256A number of erase blocks: %d", n25q256a_flash_info.block_count);
   }
-
-  delay.delay_ms(1000);
 
   uint8_t read_buf[16] = {
     0x00, 0x00, 0x00, 0x00,
