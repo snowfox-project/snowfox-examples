@@ -58,7 +58,7 @@
 #include <snowfox/driver/memory/N25Q256A/N25Q256A_Control.h>
 #include <snowfox/driver/memory/N25Q256A/N25Q256A_Configuration.h>
 
-#include <snowfox/driver/util/jedec/JedecCode.h>
+#include <snowfox/driver/memory/util/jedec/JedecCode.h>
 
 #include <snowfox/trace/Trace.h>
 #include <snowfox/trace/SerialTraceOutput.h>
@@ -176,7 +176,7 @@ int main()
 
   memory::N25Q256A::N25Q256A_Debug::debug_dumpAllRegs(trace, n25q256a_spi);
 
-  driver::util::jedec::JedecCode n25q256a_jedec_code;
+  memory::util::jedec::JedecCode n25q256a_jedec_code;
   if(!n25q256a.ioctl(memory::IOCTL_GET_JEDEC_CODE, reinterpret_cast<void*>(&n25q256a_jedec_code))) {
     trace.println(trace::Level::Error, "N25Q256A::ioctl(IOCTL_GET_JEDEC_CODE) failed");
   } else {
