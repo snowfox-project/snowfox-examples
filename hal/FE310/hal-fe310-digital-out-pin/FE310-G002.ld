@@ -61,25 +61,25 @@ SECTIONS
 
   .preinit_array  :
   {
-    PROVIDE_HIDDEN (__preinit_array_start = .);
+    PROVIDE (__preinit_array_start = .);
     KEEP (*(.preinit_array))
-    PROVIDE_HIDDEN (__preinit_array_end = .);
+    PROVIDE (__preinit_array_end = .);
   } >flash AT>flash :flash
 
   .init_array     :
   {
-    PROVIDE_HIDDEN (__init_array_start = .);
+    PROVIDE (__init_array_start = .);
     KEEP (*(SORT_BY_INIT_PRIORITY(.init_array.*) SORT_BY_INIT_PRIORITY(.ctors.*)))
     KEEP (*(.init_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .ctors))
-    PROVIDE_HIDDEN (__init_array_end = .);
+    PROVIDE (__init_array_end = .);
   } >flash AT>flash :flash
 
   .fini_array     :
   {
-    PROVIDE_HIDDEN (__fini_array_start = .);
+    PROVIDE (__fini_array_start = .);
     KEEP (*(SORT_BY_INIT_PRIORITY(.fini_array.*) SORT_BY_INIT_PRIORITY(.dtors.*)))
     KEEP (*(.fini_array EXCLUDE_FILE (*crtbegin.o *crtbegin?.o *crtend.o *crtend?.o ) .dtors))
-    PROVIDE_HIDDEN (__fini_array_end = .);
+    PROVIDE (__fini_array_end = .);
   } >flash AT>flash :flash
 
   .ctors          :
