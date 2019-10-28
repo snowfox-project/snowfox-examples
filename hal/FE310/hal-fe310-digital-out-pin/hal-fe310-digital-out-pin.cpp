@@ -23,6 +23,11 @@
  *   LED RED   = GPIO22
  *   LED GREEN = GPIO19
  *   LED BLUE  = GPIO21
+ *
+ * Program via
+ *   JLinkExe -device FE310 -if JTAG -speed 4000 -jtagconf -1,-1 -autoconnect 1
+ *   > loadfile hal-fe310-digital-out-pin.hex
+ *   > exit
  **************************************************************************************/
 
 /**************************************************************************************
