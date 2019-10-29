@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2017, 2019   Ken Rabold
+ * Copyright (C) 2017, 2019   Ken Rabold, Alexander Entinger
  *
  * This file is subject to the terms and conditions of the GNU Lesser
  * General Public License v2.1. See the file LICENSE in the top level
@@ -26,7 +26,8 @@ PHDRS
 
 SECTIONS
 {
-  __stack_size     = DEFINED(__stack_size) ? __stack_size : 1K;
+  __stack_size    = DEFINED(__stack_size) ? __stack_size : 1K;
+  __heap_size     = DEFINED(__heap_size)  ? __heap_size  : 1k;
 
   .init           :
   {
@@ -159,12 +160,18 @@ SECTIONS
   . = ALIGN(8);
   PROVIDE( __bss_end = . );
 
-  PROVIDE( _heap_start = . );
-
-  .stack ORIGIN(ram) + LENGTH(ram) - __stack_size :
+  .stack :
   {
-    PROVIDE( _heap_end = . );
+    PROVIDE( __stack_start = . );
     . = __stack_size;
-    PROVIDE( _sp = . );
+    PROVIDE( __stack_end = .) ;
   } >ram AT>ram :ram
+
+  .heap :
+	{
+		PROVIDE( __heap_start = . );
+		. = __heap_size;
+		. = __heap_size == 0 ? 0 : ORIGIN(ram) + LENGTH(ram);
+		PROVIDE( __heap_end = . );
+	} >ram AT>ram :ram
 }

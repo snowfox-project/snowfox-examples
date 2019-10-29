@@ -2,7 +2,7 @@
 
 #include <algorithm>
 
-extern "C" void __start(void) __attribute__ ((noreturn));
+extern "C" void __start(void) __attribute__ ((noreturn)) __attribute__ ((section (".text.startup")));
 
 void init_bss();
 void init_data();
@@ -12,6 +12,12 @@ void fini_array();
 
 extern "C" void __start(void)
 {
+  /* Load global pointer */
+  asm volatile("la gp, __global_pointer$");
+
+  /* Initialize stack pointer */
+  asm volatile("la sp, __stack_end");
+  asm volatile("andi sp, sp, -16");
 
   /* Clear the BSS segment */
   init_bss();
