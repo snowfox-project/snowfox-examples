@@ -18,7 +18,7 @@ set(CMAKE_CXX_COMPILER riscv64-unknown-elf-g++)
 
 ##########################################################################
 
-set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-march=rv32imac -mabi=ilp32 -mcmodel=medlow -Og -ggdb")
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-march=rv32imac -mabi=ilp32 -mcmodel=medlow -O1 -g3 -fno-exceptions")
 set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -Wl,--gc-sections,-Map=hal-fe310-digital-out-pin.map -nostartfiles -T ../FE310-G002.ld")
 set(CMAKE_SHARED_LIBRARY_LINK_CXX_FLAGS "-Wl,--relax,--gc-sections")
 
