@@ -1,14 +1,54 @@
+/**************************************************************************************
+ * INCLUDE
+ **************************************************************************************/
+
 #include <stdint.h>
 
 #include <algorithm>
 
+/**************************************************************************************
+ * TYPEDEFS
+ **************************************************************************************/
+
+typedef void(*FuncType)(void);
+
+/**************************************************************************************
+ * GLOBAL VARIABLES
+ **************************************************************************************/
+
+/* These external variables are defined by the linker script and define various
+ * sections which need to be preset with a certain value or (bss sections needs
+ * to be zeroed, data section needs to be initialized with data stored in flash,
+ * ctors of static global objects need to be called, ...)
+ */
+extern uintptr_t  __bss_start;
+extern uintptr_t  __bss_end;
+extern uintptr_t  __data_src_start;
+extern uintptr_t  __data_dst_start;
+extern uintptr_t  __data_dst_end;
+
+extern FuncType   __preinit_array_start[];
+extern FuncType   __preinit_array_end  [];
+extern FuncType   __init_array_start   [];
+extern FuncType   __init_array_end     [];
+extern FuncType   __fini_array_start   [];
+extern FuncType   __fini_array_end     [];
+
+/**************************************************************************************
+ * FUNCTION PROTOTYPES
+ **************************************************************************************/
+
 extern "C" void __start(void) __attribute__ ((noreturn)) __attribute__ ((section (".text.startup")));
 
-void init_bss();
-void init_data();
+void init_bss     ();
+void init_data    ();
 void preinit_array();
-void init_array();
-void fini_array();
+void init_array   ();
+void fini_array   ();
+
+/**************************************************************************************
+ * FUNCTION IMPLEMENTATION
+ **************************************************************************************/
 
 extern "C" void __start(void)
 {
@@ -35,23 +75,14 @@ extern "C" void __start(void)
   /* In case we should return from main perform deinitialisation - calling static dtors */
   fini_array();
 
-  for(;;)
-  {
-
-  }
+  /* Loop forever and don't return */
+  for(;;) { }
 }
-
-extern uintptr_t  __bss_start;
-extern uintptr_t  __bss_end;
 
 void init_bss()
 {
   std::fill(&__bss_start, &__bss_end, 0U);
 }
-
-extern uintptr_t  __data_src_start;
-extern uintptr_t  __data_dst_start;
-extern uintptr_t  __data_dst_end;
 
 void init_data()
 {
@@ -64,46 +95,31 @@ void init_data()
             &__data_dst_start);
 }
 
-typedef void(*PreInitFuncType)(void);
-
-extern PreInitFuncType __preinit_array_start[];
-extern PreInitFuncType __preinit_array_end[];
-
 void preinit_array()
 {
   std::for_each(__preinit_array_start,
                 __preinit_array_end,
-                [](PreInitFuncType const func)
+                [](FuncType const func)
                 {
                   func();
                 });
 }
-
-typedef void(*InitFuncType)(void);
-
-extern InitFuncType __init_array_start[];
-extern InitFuncType __init_array_end[];
 
 void init_array()
 {
   std::for_each(__init_array_start,
                 __init_array_end,
-                [](InitFuncType const func)
+                [](FuncType const func)
                 {
                   func();
                 });
 }
 
-typedef void(*FiniFuncType)(void);
-
-extern FiniFuncType __fini_array_start[];
-extern FiniFuncType __fini_array_end[];
-
 void fini_array()
 {
   std::for_each(__fini_array_start,
                 __fini_array_end,
-                [](FiniFuncType const func)
+                [](FuncType const func)
                 {
                   func();
                 });
