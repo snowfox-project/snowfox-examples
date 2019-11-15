@@ -1,5 +1,13 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-rfm9x-spi-atmega1284p-receiver-moteino-mega-usb")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega1284p-receiver-moteino-mega-usb/driver-rfm9x-spi-atmega1284p-receiver-moteino-mega-usb.cpp
+  examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega1284p-receiver-moteino-mega-usb/RFM9x_Dio1EventCallbackAdapter.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

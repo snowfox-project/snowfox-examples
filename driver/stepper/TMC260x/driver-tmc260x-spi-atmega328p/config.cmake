@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-tmc260x-spi-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/stepper/TMC260x/driver-tmc260x-spi-atmega328p/driver-tmc260x-spi-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

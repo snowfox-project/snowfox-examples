@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-serial-uart0-at90can128")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/serial/uart0-at90can128/driver-serial-uart0-at90can128.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

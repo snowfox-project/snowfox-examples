@@ -42,7 +42,7 @@ ATMEGA328P::DigitalOutPort out_port(&DDRB, &PORTB);
  * MAIN
  **************************************************************************************/
 
-int main()
+int snowfox_main()
 {
   for(;;)
   {

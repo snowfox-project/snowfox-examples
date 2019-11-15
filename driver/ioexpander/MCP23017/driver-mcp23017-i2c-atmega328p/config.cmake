@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-mcp23017-i2c-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/ioexpander/MCP23017/driver-mcp23017-i2c-atmega328p/driver-mcp23017-i2c-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

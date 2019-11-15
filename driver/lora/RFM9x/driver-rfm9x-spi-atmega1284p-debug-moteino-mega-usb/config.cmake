@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-rfm9x-spi-atmega1284p-debug-moteino-mega-usb")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega1284p-debug-moteino-mega-usb/driver-rfm9x-spi-atmega1284p-debug-moteino-mega-usb.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

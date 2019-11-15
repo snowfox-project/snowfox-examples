@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-pca9547-i2c-atmega328p-debug")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/ioexpander/PCA9547/driver-pca9547-i2c-atmega328p-debug/driver-pca9547-i2c-atmega328p-debug.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

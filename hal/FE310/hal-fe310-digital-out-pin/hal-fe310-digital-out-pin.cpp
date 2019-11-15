@@ -70,7 +70,7 @@ FE310::DigitalOutPin led_blue (&GPIO0_INPUT_EN, &GPIO0_OUTPUT_EN, &GPIO0_IOF_EN,
  * MAIN
  **************************************************************************************/
 
-int main()
+int snowfox_main()
 {
   clock.setClockFreq(static_cast<uint8_t>(FE310::ClockId::coreclk), CORECLK_FREQ_Hz);
 

@@ -42,7 +42,7 @@ ATMEGA328P::DigitalOutPin led_out  (&DDRB, &PORTB, PB5);
  * MAIN
  **************************************************************************************/
 
-int main()
+int snowfox_main()
 {
   switch_in.setPullUpMode(interface::PullUpMode::PULL_UP);
 

@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-hd44780-gpio-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/tlcd/HD44780/driver-hd44780-gpio-atmega328p/driver-hd44780-gpio-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

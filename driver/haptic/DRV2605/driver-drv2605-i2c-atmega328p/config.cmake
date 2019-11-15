@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-drv2605-i2c-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/haptic/DRV2605/driver-drv2605-i2c-atmega328p/driver-drv2605-i2c-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

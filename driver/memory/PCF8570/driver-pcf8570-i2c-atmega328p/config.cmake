@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-pcf8570-i2c-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/memory/PCF8570/driver-pcf8570-i2c-atmega328p/driver-pcf8570-i2c-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

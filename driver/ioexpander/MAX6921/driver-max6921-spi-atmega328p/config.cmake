@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-max6921-spi-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/ioexpander/MAX6921/driver-max6921-spi-atmega328p/driver-max6921-spi-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

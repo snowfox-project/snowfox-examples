@@ -42,7 +42,7 @@ ATMEGA328P::DigitalInPort in_port(&DDRB, &PORTB, &PINB);
  * MAIN
  **************************************************************************************/
 
-int main()
+int snowfox_main()
 {
   in_port.setPullUpMode(interface::PullUpMode::PULL_UP);
 

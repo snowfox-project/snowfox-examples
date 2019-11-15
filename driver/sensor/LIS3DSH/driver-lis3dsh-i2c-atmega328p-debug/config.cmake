@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-lis3dsh-i2c-atmega328p-debug")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/sensor/LIS3DSH/driver-lis3dsh-i2c-atmega328p-debug/driver-lis3dsh-i2c-atmega328p-debug.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

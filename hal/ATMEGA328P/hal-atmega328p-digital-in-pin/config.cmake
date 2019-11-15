@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "hal-atmega328p-digital-in-pin")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/hal/ATMEGA328P/hal-atmega328p-digital-in-pin/hal-atmega328p-digital-in-pin.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

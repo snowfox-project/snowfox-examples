@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-as5600-i2c-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/sensor/AS5600/driver-as5600-i2c-atmega328p/driver-as5600-i2c-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

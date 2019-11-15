@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-ad7151-i2c-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/sensor/AD7151/driver-ad7151-i2c-atmega328p/driver-ad7151-i2c-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

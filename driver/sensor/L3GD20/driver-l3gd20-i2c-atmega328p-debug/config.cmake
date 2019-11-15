@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-l3gd20-i2c-atmega328p-debug")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/sensor/L3GD20/driver-l3gd20-i2c-atmega328p-debug/driver-l3gd20-i2c-atmega328p-debug.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

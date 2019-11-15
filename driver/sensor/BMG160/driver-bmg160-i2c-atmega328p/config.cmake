@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-bmg160-i2c-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/sensor/BMG160/driver-bmg160-i2c-atmega328p/driver-bmg160-i2c-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

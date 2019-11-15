@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-ina220-i2c-atmega328p-debug")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/sensor/INA220/driver-ina220-i2c-atmega328p-debug/driver-ina220-i2c-atmega328p-debug.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-serial-uart0-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/serial/uart0-atmega328p/driver-serial-uart0-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

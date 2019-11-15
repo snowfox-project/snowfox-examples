@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "trace-serial-atmega32u4-uart1")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/trace/trace-serial-atmega32u4-uart1/trace-serial-atmega32u4-uart1.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

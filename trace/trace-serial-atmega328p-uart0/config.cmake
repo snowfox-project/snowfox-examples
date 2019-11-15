@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "trace-serial-atmega328p-uart0")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/trace/trace-serial-atmega328p-uart0/trace-serial-atmega328p-uart0.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

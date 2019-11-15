@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-ra6963-gpio-at90can128")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/glcd/RA6963/driver-ra6963-gpio-at90can128/driver-ra6963-gpio-at90can128.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

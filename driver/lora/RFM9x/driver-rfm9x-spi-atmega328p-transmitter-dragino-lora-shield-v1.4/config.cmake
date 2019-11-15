@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-rfm9x-spi-atmega328p-transmitter-dragino-lora-shield-v1.4")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/lora/RFM9x/driver-rfm9x-spi-atmega328p-transmitter-dragino-lora-shield-v1.4/driver-rfm9x-spi-atmega328p-transmitter-dragino-lora-shield-v1.4.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

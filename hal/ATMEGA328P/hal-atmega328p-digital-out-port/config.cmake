@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "hal-atmega328p-digital-out-port")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/hal/ATMEGA328P/hal-atmega328p-digital-out-port/hal-atmega328p-digital-out-port.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

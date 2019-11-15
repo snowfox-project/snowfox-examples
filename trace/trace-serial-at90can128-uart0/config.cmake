@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "trace-serial-at90can128-uart0")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/trace/trace-serial-at90can128-uart0/trace-serial-at90can128-uart0.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-n25q256a-spi-atmega328p")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/memory/N25Q256A/driver-n25q256a-spi-atmega328p/driver-n25q256a-spi-atmega328p.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

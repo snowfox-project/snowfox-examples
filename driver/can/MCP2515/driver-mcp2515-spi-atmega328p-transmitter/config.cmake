@@ -1,5 +1,12 @@
 ##########################################################################
 
+set(SNOWFOX_APPLICATON_TARGET "driver-mcp2515-spi-atmega328p-transmitter")
+set(SNOWFOX_APPLICATON_SRCS
+  examples/driver/can/MCP2515/driver-mcp2515-spi-atmega328p-transmitter/driver-mcp2515-spi-atmega328p-transmitter.cpp
+)
+
+##########################################################################
+
 set(MCU_ARCH avr)
 
 ##########################################################################

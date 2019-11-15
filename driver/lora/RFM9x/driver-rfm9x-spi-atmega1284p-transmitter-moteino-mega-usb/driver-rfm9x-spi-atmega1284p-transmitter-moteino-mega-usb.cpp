@@ -77,7 +77,7 @@
 #include <snowfox/trace/Trace.h>
 #include <snowfox/trace/SerialTraceOutput.h>
 
-#include <RFM9x_Dio1EventCallbackAdapter.h>
+#include "RFM9x_Dio1EventCallbackAdapter.h"
 
 /**************************************************************************************
  * NAMESPACES
@@ -105,7 +105,7 @@ static hal::interface::TriggerMode const RFM9x_DIO0_INT_TRIGGER_MODE = hal::inte
  * MAIN
  **************************************************************************************/
 
-int main()
+int snowfox_main()
 {
   /************************************************************************************
    * HAL
