@@ -3,7 +3,6 @@
 set(SNOWFOX_APPLICATON_TARGET "hal-fe310-digital-out-pin")
 set(SNOWFOX_APPLICATON_SRCS
   examples/hal/FE310/hal-fe310-digital-out-pin/hal-fe310-digital-out-pin.cpp
-  examples/hal/FE310/hal-fe310-digital-out-pin/startup.cpp
 )
 
 ##########################################################################
