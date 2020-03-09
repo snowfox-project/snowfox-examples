@@ -37,6 +37,7 @@
 
 #include <avr/io.h>
 
+#include <snowfox/hal/avr/ATMEGA328P/Delay.h>
 #include <snowfox/hal/avr/ATMEGA328P/DigitalInPin.h>
 #include <snowfox/hal/avr/ATMEGA328P/DigitalOutPin.h>
 #include <snowfox/hal/avr/ATMEGA328P/CriticalSection.h>
@@ -55,6 +56,7 @@
 #include <snowfox/driver/can/MCP2515/MCP2515_Debug.h>
 #include <snowfox/driver/can/MCP2515/MCP2515_Control.h>
 #include <snowfox/driver/can/MCP2515/MCP2515_CanControl.h>
+#include <snowfox/driver/can/MCP2515/MCP2515_Configuration.h>
 #include <snowfox/driver/can/MCP2515/MCP2515_CanConfiguration.h>
 
 #include <snowfox/driver/can/MCP2515/events/MCP2515_EventCallback.h>
@@ -100,6 +102,7 @@ int snowfox_main()
    * HAL
    ************************************************************************************/
 
+  ATMEGA328P::Delay                       delay;
   ATMEGA328P::InterruptController         int_ctrl    (&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
   ATMEGA328P::CriticalSection             crit_sec    (&SREG);
   ATMEGA328P::ExternalInterruptController ext_int_ctrl(&EICRA,
@@ -160,9 +163,10 @@ int snowfox_main()
   can::interface::CanFrameBuffer              mcp2515_can_tx_buf                (CAN_TX_BUFFER_SIZE);
   can::interface::CanFrameBuffer              mcp2515_can_rx_buf                (CAN_RX_BUFFER_SIZE);
 
-  can::MCP2515::MCP2515_IoSpi                 mcp2515_io_spi                    (spi_master(), mcp2515_cs        );
-  can::MCP2515::MCP2515_Control               mcp2515_ctrl                      (mcp2515_io_spi                  );
-  can::MCP2515::MCP2515_CanConfiguration      mcp2515_can_config                (mcp2515_io_spi, F_MCP2515_MHz   );
+  can::MCP2515::MCP2515_IoSpi                 mcp2515_io_spi                    (spi_master(), mcp2515_cs);
+  can::MCP2515::MCP2515_Control               mcp2515_ctrl                      (mcp2515_io_spi);
+  can::MCP2515::MCP2515_Configuration         mcp2515_config                    (mcp2515_io_spi, delay, F_MCP2515_MHz);
+  can::MCP2515::MCP2515_CanConfiguration      mcp2515_can_config                (mcp2515_config);
   can::MCP2515::MCP2515_CanControl            mcp2515_can_control               (mcp2515_can_tx_buf, mcp2515_can_rx_buf, mcp2515_ctrl);
 
   can::MCP2515::MCP2515_onMessageError        mcp2515_on_message_error;
