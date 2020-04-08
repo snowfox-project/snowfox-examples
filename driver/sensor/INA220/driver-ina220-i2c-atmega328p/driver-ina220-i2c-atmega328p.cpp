@@ -105,18 +105,13 @@ int snowfox_main()
 
   for(;;)
   {
-    int16_t shunt_voltage  = 0,
-            bus_voltage    = 0;
-    int16_t ina220_data[2] = {0};
+    sensor::INA220::SensorData sensor_data;
 
-    ina220.read(reinterpret_cast<uint8_t *>(&ina220_data[0]), 4);
-
-    shunt_voltage = ina220_data[0];
-    bus_voltage   = ina220_data[1];
+    ina220.read(sensor_data.buf, sizeof(sensor_data.buf));
 
     char msg[32];
-    snprintf(msg, 32, "V_SHUNT / RAW = %04X\n", shunt_voltage);
-    snprintf(msg, 32, "V_BUS   / RAW = %04X\n", bus_voltage  );
+    snprintf(msg, 32, "V_SHUNT / RAW = %04X\n", sensor_data.data.shunt_voltage);
+    snprintf(msg, 32, "V_BUS   / RAW = %04X\n", sensor_data.data.bus_voltage  );
 
     delay.delay_ms(LOOP_DELAY_ms);
   }
