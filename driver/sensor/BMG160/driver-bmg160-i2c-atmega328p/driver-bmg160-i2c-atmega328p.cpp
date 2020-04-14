@@ -46,8 +46,8 @@ using namespace snowfox::driver;
  * GLOBAL CONSTANTS
  **************************************************************************************/
 
-static uint8_t  const BMG160_I2C_ADDR  = (0x68 << 1);
-static uint32_t const LOOP_DELAY_ms    = 1000; /* 1 s */
+static uint8_t  const BMG160_I2C_ADDR = (0x68 << 1);
+static uint32_t const LOOP_DELAY_ms   = 1000; /* 1 s */
 
 /**************************************************************************************
  * MAIN

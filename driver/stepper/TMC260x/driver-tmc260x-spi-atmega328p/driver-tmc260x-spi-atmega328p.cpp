@@ -48,9 +48,9 @@ using namespace snowfox::driver;
  * GLOBAL CONSTANTS
  **************************************************************************************/
 
-static hal::interface::SpiMode     const TMC26x_SPI_MODE         = hal::interface::SpiMode::MODE_0;
-static hal::interface::SpiBitOrder const TMC26x_SPI_BIT_ORDER    = hal::interface::SpiBitOrder::MSB_FIRST;
-static uint32_t                    const TMC26x_SPI_PRESCALER    = 16; /* Arduino Uno Clk = 16 MHz -> SPI Clk = 1 MHz                     */
+static hal::interface::SpiMode     const TMC26x_SPI_MODE      = hal::interface::SpiMode::MODE_0;
+static hal::interface::SpiBitOrder const TMC26x_SPI_BIT_ORDER = hal::interface::SpiBitOrder::MSB_FIRST;
+static uint32_t                    const TMC26x_SPI_PRESCALER = 16; /* Arduino Uno Clk = 16 MHz -> SPI Clk = 1 MHz                     */
 
 /**************************************************************************************
  * MAIN

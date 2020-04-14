@@ -90,8 +90,8 @@ using namespace snowfox::driver;
  * CONSTANTS
  **************************************************************************************/
 
-static uint16_t                    const UART_RX_BUFFER_SIZE =  0;
-static uint16_t                    const UART_TX_BUFFER_SIZE = 16;
+static uint16_t                    const UART_RX_BUFFER_SIZE         =  0;
+static uint16_t                    const UART_TX_BUFFER_SIZE         = 16;
 
 static hal::interface::SpiMode     const RFM9x_SPI_MODE              = hal::interface::SpiMode::MODE_0;
 static hal::interface::SpiBitOrder const RFM9x_SPI_BIT_ORDER         = hal::interface::SpiBitOrder::MSB_FIRST;

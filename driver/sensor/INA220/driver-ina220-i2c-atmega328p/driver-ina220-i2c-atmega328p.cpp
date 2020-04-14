@@ -46,8 +46,8 @@ using namespace snowfox::driver;
  * GLOBAL CONSTANTS
  **************************************************************************************/
 
-static uint8_t  const INA220_I2C_ADDR  = (0x40 << 1); /* A1 and A0 = GND */
-static uint32_t const LOOP_DELAY_ms    = 1000; /* 1 s */
+static uint8_t  const INA220_I2C_ADDR = (0x40 << 1); /* A1 and A0 = GND */
+static uint32_t const LOOP_DELAY_ms   = 1000; /* 1 s */
 
 /**************************************************************************************
  * MAIN

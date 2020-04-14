@@ -75,12 +75,12 @@ using namespace snowfox::driver;
  * CONSTANTS
  **************************************************************************************/
 
-static uint16_t                    const UART_RX_BUFFER_SIZE         = 0;
-static uint16_t                    const UART_TX_BUFFER_SIZE         = 64;
+static uint16_t                    const UART_RX_BUFFER_SIZE    = 0;
+static uint16_t                    const UART_TX_BUFFER_SIZE    = 64;
 
-static hal::interface::SpiMode     const N25Q256A_SPI_MODE           = hal::interface::SpiMode::MODE_0;
-static hal::interface::SpiBitOrder const N25Q256A_SPI_BIT_ORDER      = hal::interface::SpiBitOrder::MSB_FIRST;
-static uint32_t                    const N25Q256A_SPI_PRESCALER      = 16;       /* Arduino Uno Clk = 16 MHz -> SPI Clk = 1 MHz */
+static hal::interface::SpiMode     const N25Q256A_SPI_MODE      = hal::interface::SpiMode::MODE_0;
+static hal::interface::SpiBitOrder const N25Q256A_SPI_BIT_ORDER = hal::interface::SpiBitOrder::MSB_FIRST;
+static uint32_t                    const N25Q256A_SPI_PRESCALER = 16;       /* Arduino Uno Clk = 16 MHz -> SPI Clk = 1 MHz */
 
 /**************************************************************************************
  * FUNCTION DECLARATION
