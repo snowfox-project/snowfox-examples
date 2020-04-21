@@ -90,7 +90,7 @@ int snowfox_main()
       case 7: led_blue.clr(); led_green.clr(); led_red.clr(); break;
     }
 
-    delay.delay_ms(100);
+    delay.delay_ms(250);
   }
 
   return 0;
