@@ -26,16 +26,7 @@
  * NAMESPACE
  **************************************************************************************/
 
-namespace snowfox
-{
-
-namespace driver
-{
-
-namespace lora
-{
-
-namespace RFM9x
+namespace snowfox::driver::lora::RFM9x
 {
 
 /**************************************************************************************
@@ -74,10 +65,4 @@ void RFM9x_Dio1EventCallbackAdapter::onExternalInterrupt()
  * NAMESPACE
  **************************************************************************************/
 
-} /* RFM9x */
-
-} /* lora */
-
-} /* driver */
-
-} /* snowfox */
+} /* snowfox::driver::lora::RFM9x */

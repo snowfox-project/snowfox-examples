@@ -32,16 +32,7 @@
  * NAMESPACE
  **************************************************************************************/
 
-namespace snowfox
-{
-
-namespace driver
-{
-
-namespace lora
-{
-
-namespace RFM9x
+namespace snowfox::driver::lora::RFM9x
 {
 
 /**************************************************************************************
@@ -71,12 +62,6 @@ private:
  * NAMESPACE
  **************************************************************************************/
 
-} /* RFM9x */
-
-} /* lora */
-
-} /* driver */
-
-} /* snowfox */
+} /* snowfox::driver::lora::RFM9x */
 
 #endif /* EXAMPLES_DRIVER_LORA_RFM9X_DRIVER_RFM9X_SPI_ATMEGA1284P_TRANSMITTER_MOTEINO_MEGA_USB_RFM9X_DIO1EVENTCALLBACKADAPTER_H_ */

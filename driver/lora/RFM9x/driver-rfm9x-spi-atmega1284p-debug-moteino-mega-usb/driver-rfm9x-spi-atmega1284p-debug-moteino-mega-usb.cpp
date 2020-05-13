@@ -87,7 +87,7 @@ int snowfox_main()
   ATMEGA1284P::Flash               flash;
 
   ATMEGA1284P::InterruptController int_ctrl  (&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &PCMSK3, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &UCSR1B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
-  ATMEGA1284P::CriticalSection     crit_sec  (&SREG);
+  ATMEGA1284P::CriticalSection     crit_sec;
 
   ATMEGA1284P::DigitalOutPin       rfm9x_cs  (&DDRB, &PORTB,        4); /* CS   = D4 = PB4 */
   ATMEGA1284P::DigitalOutPin       rfm9x_sck (&DDRB, &PORTB,        7); /* SCK  = D7 = PB7 */

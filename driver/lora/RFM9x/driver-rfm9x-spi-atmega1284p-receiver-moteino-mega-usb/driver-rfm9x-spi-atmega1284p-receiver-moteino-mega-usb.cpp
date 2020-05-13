@@ -113,7 +113,7 @@ int snowfox_main()
   ATMEGA1284P::Delay                       delay;
 
   ATMEGA1284P::InterruptController         int_ctrl    (&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &PCMSK3, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &UCSR1B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
-  ATMEGA1284P::CriticalSection             crit_sec    (&SREG);
+  ATMEGA1284P::CriticalSection             crit_sec;
   ATMEGA1284P::ExternalInterruptController ext_int_ctrl(&EICRA,
                                                         int_ctrl);
 

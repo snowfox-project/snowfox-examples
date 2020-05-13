@@ -53,7 +53,7 @@ int snowfox_main()
   /* HAL ******************************************************************************/
 
   AT90CAN128::InterruptController int_ctrl(&EIMSK, &TIMSK2, &TIMSK1, &TIMSK0, &CANGIE, &SPCR, &UCSR0B, &ACSR, &ADCSRA, &EECR, &TIMSK3, &UCSR1B, &TWCR, &SPMCSR);
-  AT90CAN128::CriticalSection     crit_sec(&SREG);
+  AT90CAN128::CriticalSection     crit_sec;
 
   blox::AT90CAN128::UART1         uart1   (&UDR1, &UCSR1A, &UCSR1B, &UCSR1C, &UBRR1, int_ctrl, F_CPU);
 

@@ -63,7 +63,7 @@ int snowfox_main()
   /* HAL ******************************************************************************/
 
   ATMEGA1284P::InterruptController int_ctrl(&EIMSK, &PCICR, &PCMSK0, &PCMSK1, &PCMSK2, &PCMSK3, &WDTCSR, &TIMSK0, &TIMSK1, &TIMSK2, &UCSR0B, &UCSR1B, &SPCR, &TWCR, &EECR, &SPMCSR, &ACSR, &ADCSRA);
-  ATMEGA1284P::CriticalSection     crit_sec(&SREG);
+  ATMEGA1284P::CriticalSection     crit_sec;
 
   blox::ATMEGA1284P::UART0         uart0   (&UDR0, &UCSR0A, &UCSR0B, &UCSR0C, &UBRR0, int_ctrl, F_CPU);
 
