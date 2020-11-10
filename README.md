@@ -1,6 +1,6 @@
 Snowfox Example Projects
 ========================
-*This project is currently in alpha phase. This means that most but not all features are complete and have been tested to varying degrees.*
+*This project is retired due to ever-increasing MCU complexity and increasingly better vendor provided HALs and middleware.*
 
 <p align="center"> 
 <img src=".ci/logo/snowfox-os-logo-v2.jpg">
